@@ -143,6 +143,8 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -152,10 +154,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dao\ModelVozidlaDao.cs" />
+    <Compile Include="Dao\UzivatelDao.cs" />
+    <Compile Include="Dao\UzivatelskaRoleDao.cs" />
     <Compile Include="Dao\VozidloDao.cs" />
     <Compile Include="Dao\VyrobceDao.cs" />
     <Compile Include="Mappings\ModelVozidlaMap.cs" />
     <Compile Include="Mappings\PersonMap.cs" />
+    <Compile Include="Mappings\UzivatelMap.cs" />
+    <Compile Include="Mappings\UzivatelskaRoleMap.cs" />
     <Compile Include="Mappings\VozidloMap.cs" />
     <Compile Include="Mappings\VyrobceMap.cs" />
     <Compile Include="Migrations\AddLogTable.cs" />
