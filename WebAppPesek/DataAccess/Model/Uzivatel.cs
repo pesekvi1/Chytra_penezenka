@@ -21,5 +21,7 @@ namespace DataAccess.Model
         public virtual string Heslo { get; set; }
 
         public virtual UzivatelskaRole Role { get; set; }
-    }
+
+        public virtual Skupina Skupina { get; set; }
+}
 }

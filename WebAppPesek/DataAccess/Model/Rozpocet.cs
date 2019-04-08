@@ -17,6 +17,6 @@ namespace DataAccess.Model
 
         public virtual DateTime PlatnyDo { get; set; }
 
-        public virtual List<PolozkaRozpoctu> Polozky { get; set; }
+        public virtual IList<PolozkaRozpoctu> Polozky { get; set; }
     }
 }
