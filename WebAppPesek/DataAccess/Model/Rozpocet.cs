@@ -9,14 +9,14 @@ namespace DataAccess.Model
 {
     public class Rozpocet : IEntity
     {
-        public int Id { get; set; }
+        public virtual int Id { get; set; }
 
-        public string Nazev { get; set; }
+        public virtual string Nazev { get; set; }
 
-        public DateTime PlatnyOd { get; set; }
+        public virtual DateTime PlatnyOd { get; set; }
 
-        public DateTime PlatnyDo { get; set; }
+        public virtual DateTime PlatnyDo { get; set; }
 
-        public List<PolozkaRozpoctu> Polozky { get; set; }
+        public virtual List<PolozkaRozpoctu> Polozky { get; set; }
     }
 }

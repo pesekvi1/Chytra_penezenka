@@ -9,18 +9,18 @@ namespace DataAccess.Model
 {
     public class Vozidlo : IEntity
     {
-        public int Id { get; set; }
+        public virtual int Id { get; set; }
 
-        public Vyrobce Znacka { get; set; }
+        public virtual Vyrobce Znacka { get; set; }
 
-        public ModelVozidla Model { get; set; }
+        public virtual ModelVozidla Model { get; set; }
 
-        public string Spz { get; set; }
+        public virtual string Spz { get; set; }
 
-        public DateTime RokVyroby { get; set; }
+        public virtual DateTime RokVyroby { get; set; }
 
-        public int ObsahMotoru { get; set; }
+        public virtual int ObsahMotoru { get; set; }
 
-        public int PocetValcu { get; set; }
+        public virtual int PocetValcu { get; set; }
     }
 }

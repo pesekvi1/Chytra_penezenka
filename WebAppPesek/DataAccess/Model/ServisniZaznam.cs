@@ -9,6 +9,6 @@ namespace DataAccess.Model
 {
     public class ServisniZaznam : IEntity
     {
-        public int Id { get; set; }
+        public virtual int Id { get; set; }
     }
 }

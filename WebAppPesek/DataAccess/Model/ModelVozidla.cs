@@ -9,10 +9,10 @@ namespace DataAccess.Model
 {
     public class ModelVozidla : IEntity
     {
-        public int Id { get; set; }
+        public virtual int Id { get; set; }
 
-        public string Nazev { get; set; }
+        public virtual string Nazev { get; set; }
 
-        public Vyrobce Vyrobce { get; set; }
+        public virtual Vyrobce Vyrobce { get; set; }
     }
 }
