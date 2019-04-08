@@ -28,8 +28,7 @@ namespace DataAccess
                      */
 
                     _factory = Fluently.Configure()
-                        .Database(MsSqlConfiguration.MsSql2012.ConnectionString("Data Source=DESKTOP-A5PR65K;Initial Catalog=Zoo;User Id=sa;Password=heslo1234;"))
-                        //.Mappings(x => x.FluentMappings.AddFromAssemblyOf<AnimalCategory>())
+                        .Database(MsSqlConfiguration.MsSql2012.ConnectionString("Data Source=DESKTOP-A5PR65K;Initial Catalog=tnpw2;User Id=sa;Password=heslo1234;"))
                         .Mappings(x => x.FluentMappings.AddFromAssemblyOf<Vozidlo>())
                         .BuildSessionFactory();
                 }
