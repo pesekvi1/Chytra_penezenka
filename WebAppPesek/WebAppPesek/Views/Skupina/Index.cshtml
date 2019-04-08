@@ -1,0 +1,35 @@
+﻿@using DataAccess.Model
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="mt-4">Skupiny</h2>
+
+<div>@Html.ActionLink("Vytvoreni skupiny", "VytvoreniSkupiny", "Skupina")</div>
+
+@if (ViewBag.ListJePrazdny)
+{
+    <p>Zatím nemáte vytvořené žádné skupiny</p>
+}
+else
+{
+    <table class="table table-bordered table-hover col-md-6 text-center">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nazev skupiny</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Skupina s in ViewBag.MeSkupiny)
+            {
+                <tr>
+                    <td>@s.Id</td>
+                    <td>@Html.ActionLink(s.Nazev, "Detail", "Skupina", new { id = s.Id }, new { title = s.Nazev })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+

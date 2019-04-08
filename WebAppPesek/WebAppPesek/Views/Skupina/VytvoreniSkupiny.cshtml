@@ -1,0 +1,19 @@
+﻿@model DataAccess.Model.Skupina
+@{
+    ViewBag.Title = "Vytvoreni Skupiny";
+}
+
+<h2>Vytvoreni Skupiny</h2>
+
+@using (Html.BeginForm("PridaniSkupiny", "Skupina", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+        <label>Název skupiny</label>
+        @Html.TextBoxFor(a => a.Nazev, new { @class = "form-control col-sm-6" })
+        @Html.ValidationMessageFor(a => a.Nazev, "", new { @class = "text-danger" })
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Vlozit</button>
+}
+

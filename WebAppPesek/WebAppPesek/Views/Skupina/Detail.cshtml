@@ -1,0 +1,30 @@
+﻿@using DataAccess.Model
+@{
+    //ViewBag.Title = "Detail";
+}
+
+<h2 class="mt-4">Detail</h2>
+<p>
+    <a href="@Url.Action("Index", "Skupina")">Zpět na výpis</a>
+</p>
+
+<table class="table table-bordered table-hover col-6 text-center">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Jmeno</th>
+        <th>Prijmeni</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (Uzivatel u in ViewBag.Uzivatele)
+    {
+        <tr>
+            <td>@u.Id</td>
+            <td>@u.Jmeno</td>
+            <td>@u.Prijmeni</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
