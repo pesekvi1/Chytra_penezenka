@@ -7,7 +7,7 @@ using DataAccess.Model;
 
 namespace DataAccess.Dao
 {
-    class UzivatelskaRoleDao : DaoBase<UzivatelskaRole>
+    public class UzivatelskaRoleDao : DaoBase<UzivatelskaRole>
     {
     }
 }

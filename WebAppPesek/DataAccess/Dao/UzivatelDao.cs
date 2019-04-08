@@ -8,7 +8,7 @@ using NHibernate.Criterion;
 
 namespace DataAccess.Dao
 {
-    class UzivatelDao : DaoBase<Uzivatel>
+    public class UzivatelDao : DaoBase<Uzivatel>
     {
         public Uzivatel getByLoginAndPassword(string login, string password)
         {
