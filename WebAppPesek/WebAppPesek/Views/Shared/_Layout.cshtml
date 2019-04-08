@@ -15,9 +15,9 @@
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
         <div class="bg-light border-right" id="sidebar-wrapper">
-            <div class="sidebar-heading">Evidence výdajů </div>
+            <div class="sidebar-heading">@Html.ActionLink("Evidence výdajů", "Index", "Home", new { }, new { @class = "home-page" }) </div>
             <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+                <a href="@Url.Action("Index", "Skupina")" class="list-group-item list-group-item-action bg-light">Skupiny</a>
                 <a href="#" class="list-group-item list-group-item-action bg-light">Shortcuts</a>
                 <a href="#" class="list-group-item list-group-item-action bg-light">Overview</a>
                 <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>
@@ -32,7 +32,7 @@
                 <button class="btn btn-light" id="menu-toggle">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler btn btn-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <!--<span class="navbar-toggler-icon"></span>-->
                     <span>Uživatel</span>
                 </button>
@@ -46,10 +46,12 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Dropdown
+                                @{
+                                    Html.RenderAction("Uzivatel", "Home");
+                                }
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="@Url.Action("Logout","Login")">Odhlásit se</a>
                                 <a class="dropdown-item" href="#">Another action</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Something else here</a>
@@ -61,7 +63,7 @@
             <div class="container-fluid">
                 @RenderBody()
             </div>
-            
+
         </div>
         <!-- /#page-content-wrapper -->
     </div>
@@ -73,9 +75,11 @@
     <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
     <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
     <!-- Menu Toggle Script -->
-    <script>$("#menu-toggle").click(function(e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-    });</script>
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
 </body>
 </html>
