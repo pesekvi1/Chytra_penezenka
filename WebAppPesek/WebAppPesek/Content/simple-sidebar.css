@@ -34,6 +34,9 @@ body {
 }
 
 @media (min-width: 768px) {
+    .desktop-screen {
+        margin-left: 30%
+    }
     #sidebar-wrapper {
         margin-left: 0;
     }
@@ -46,4 +49,12 @@ body {
     #wrapper.toggled #sidebar-wrapper {
         margin-left: -15rem;
     }
+}
+.home-page {
+    text-decoration: none;
+    color: black;
+    text-underline: none;
+}
+.home-page:hover {
+    text-decoration: none
 }
