@@ -1,0 +1,47 @@
+﻿@using DataAccess.Model
+@model Uzivatel
+@{
+    ViewBag.Title = "PridatUzivatele";
+}
+
+<h2>Pridat Uzivatee</h2>
+
+@using (Html.BeginForm("Vytvorit", "Uzivatel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+        <label>Jméno</label>
+        @Html.TextBoxFor(a => a.Jmeno, new { @class = "form-control col-sm-6" })
+        @Html.ValidationMessageFor(a => a.Jmeno, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label>Příjmení</label>
+        @Html.TextBoxFor(a => a.Prijmeni, new { @class = "form-control col-sm-6" })
+        @Html.ValidationMessageFor(a => a.Prijmeni, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label>Login</label>
+        @Html.TextBoxFor(a => a.Login, new { @class = "form-control col-sm-6" })
+        @Html.ValidationMessageFor(a => a.Login, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label>Heslo</label>
+        @Html.TextBoxFor(a => a.Heslo, new { @type = "password", @class = "form-control col-sm-6" })
+        @Html.ValidationMessageFor(a => a.Heslo, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label>Skupina</label>
+        @Html.DropDownList("skupinaID", new SelectList(ViewBag.Skupiny, "Id", "Nazev"), new { @class = "form-control col-sm-6" })
+    </div>
+
+    <div class="form-group">
+        <label>Role</label>
+        @Html.DropDownList("roleID", new SelectList(ViewBag.Role, "Id", "Nazev"), new { @class = "form-control col-sm-6" })
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Přidat uživatele</button>
+}

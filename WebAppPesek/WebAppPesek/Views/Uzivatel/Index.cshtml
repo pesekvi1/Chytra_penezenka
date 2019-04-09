@@ -1,0 +1,34 @@
+﻿@using DataAccess.Model
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="mt-4">Výpis uživatelů</h2>
+
+@Html.ActionLink("Přidat uživatele", "PridatUzivatee", "Uzivatel")
+
+<table class="table table-bordered table-hover col-6 text-center">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Jméno</th>
+            <th>Příjmení</th>
+            <th>Role</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Uzivatel u in ViewBag.Uzivatele)
+        {
+            <tr>
+                <td>@u.Id</td>
+                <td>@u.Jmeno</td>
+                <td>@u.Prijmeni</td>
+                <td>@u.Role.Nazev</td>
+                <td>@Html.ActionLink("Delete", "Odstranit", "Uzivatel", new { id = u.Id }, new { onclick = "return confirm('prejete si opravdu smazat uživatele " + u.Jmeno + "');" })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
