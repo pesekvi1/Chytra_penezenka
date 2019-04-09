@@ -18,7 +18,7 @@
             <div class="sidebar-heading">@Html.ActionLink("Evidence výdajů", "Index", "Home", new { }, new { @class = "home-page" }) </div>
             <div class="list-group list-group-flush">
                 <a href="@Url.Action("Index", "Skupina")" class="list-group-item list-group-item-action bg-light">Skupiny</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">Shortcuts</a>
+                <a href="@Url.Action("Index","Uzivatel")" class="list-group-item list-group-item-action bg-light">Uživatelé</a>
                 <a href="#" class="list-group-item list-group-item-action bg-light">Overview</a>
                 <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>
                 <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
@@ -61,6 +61,16 @@
                 </div>
             </nav>
             <div class="container-fluid">
+                @if (TempData["message-success"] != null)
+                {
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        @TempData["message-success"]
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                }
+                
                 @RenderBody()
             </div>
 
