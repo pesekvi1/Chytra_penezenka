@@ -1,0 +1,44 @@
+﻿@using DataAccess.Model
+@model Skupina
+@{
+    ViewBag.Title = "Editace skupinz";
+}
+
+<h2>Editace</h2>
+
+@using (Html.BeginForm("UpraveniSkupiny", "Skupina", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.Id)
+    @Html.HiddenFor(x => x.Zakladatel)
+    @Html.HiddenFor(x => x.Uzivatele)
+
+    <div class="form-group">
+        <label>Název skupiny</label>
+        @Html.TextBoxFor(a => a.Nazev, new { @class = "form-control col-sm-6" })
+        @Html.ValidationMessageFor(a => a.Nazev, "", new { @class = "text-danger" })
+    </div>
+
+    <table class="table table-bordered table-hover col-6 text-center">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Jmeno</th>
+            <th>Prijmeni</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (Uzivatel u in ViewBag.Uzivatele)
+        {
+            <tr>
+                <td>@u.Id</td>
+                <td>@u.Jmeno</td>
+                <td>@u.Prijmeni</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Odeslat</button>
+}
+
+
