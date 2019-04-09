@@ -58,5 +58,10 @@ namespace DataAccess.Dao
             }
 
         }
+
+        public void CloseSession()
+        {
+            session.Close();
+        }
     }
 }
