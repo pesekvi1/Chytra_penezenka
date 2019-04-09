@@ -18,6 +18,7 @@ else
             <tr>
                 <th>ID</th>
                 <th>Nazev skupiny</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -26,6 +27,10 @@ else
                 <tr>
                     <td>@s.Id</td>
                     <td>@Html.ActionLink(s.Nazev, "Detail", "Skupina", new { id = s.Id }, new { title = s.Nazev })</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Editace", "Skupina", new { id = s.Id }, new { title = s.Nazev })
+                        @Html.ActionLink("Delete", "Odstranit", "Skupina", new { id = s.Id }, new { onclick = "return confirm('prejete si opravdu smazat skupinu " + s.Nazev + "');" })
+                    </td>
                 </tr>
             }
         </tbody>
