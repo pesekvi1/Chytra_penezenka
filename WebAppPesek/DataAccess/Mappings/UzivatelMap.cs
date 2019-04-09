@@ -21,7 +21,8 @@ namespace DataAccess.Mappings
             Map(x => x.Login).Column("login");
             Map(x => x.Heslo).Column("heslo");
             References(x => x.Role).ForeignKey("FK_uzivatel_uzivatel_role_id").Column("role_id");
-            References(x => x.Skupina).ForeignKey("FK_uzivatel_skupina_id").Nullable();
+            References(x => x.Skupina).ForeignKey("FK_uzivatel_skupina_id").Nullable().Cascade.SaveUpdate();
+            References(x => x.Vytvoril).ForeignKey("FK_uzivatel_uzivatel_id").Nullable();
         }
     }
 }
