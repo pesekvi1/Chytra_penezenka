@@ -24,5 +24,10 @@ namespace DataAccess.Dao
                 .Add(Restrictions.Eq("Login", login))
                 .UniqueResult<Uzivatel>();
         }
+
+        public IList<Uzivatel> GetUsersForAdmin(Uzivatel vytvoril)
+        {
+            return session.CreateCriteria<Uzivatel>().Add(Restrictions.Eq("Vytvoril", vytvoril)).List<Uzivatel>();
+        }
     }
 }
