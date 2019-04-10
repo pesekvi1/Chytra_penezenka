@@ -16,7 +16,7 @@ namespace DataAccess.Mappings
             Id(x => x.Id).GeneratedBy.Native();
             Map(x => x.Nazev).Not.Nullable();
             References(x => x.Zakladatel).Not.Nullable();
-            HasMany(x => x.Uzivatele).Inverse().Cascade.SaveUpdate();
+            HasMany(x => x.Uzivatele).Cascade.SaveUpdate();
         }
     }
 }
