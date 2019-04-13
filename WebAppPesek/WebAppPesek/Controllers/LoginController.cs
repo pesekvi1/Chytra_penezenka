@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using DataAccess.Dao;
+using DataAccess.Model;
 
 namespace WebAppPesek.Controllers
 {
@@ -25,7 +27,7 @@ namespace WebAppPesek.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            TempData["error-message"] = "Login nebo heslo neni spravne";
+            TempData["user-error-message"] = "Login nebo heslo neni spravne";
             return RedirectToAction("Index", "Login");
         }
 
@@ -33,6 +35,50 @@ namespace WebAppPesek.Controllers
         {
             FormsAuthentication.SignOut();
             Session.Clear();
+
+            return RedirectToAction("Index", "Login");
+        }
+
+        public ActionResult Registration()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SignUp(Uzivatel uzivatel)
+        {
+            UzivatelDao uzivatelDao = new UzivatelDao();
+
+            if (!uzivatelDao.DoesUsernameExists(uzivatel.Login))
+            {
+                UzivatelskaRoleDao uzivatelskaRoleDao = new UzivatelskaRoleDao();
+                UzivatelskaRole role = uzivatelskaRoleDao.getRoleWithName("admin");
+                uzivatelskaRoleDao.CloseSession();
+
+                uzivatel.Skupina = null;
+                uzivatel.Role = role;
+                uzivatel.Vytvoril = null;
+
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        uzivatelDao.CreateWithHashedPassword(uzivatel);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        throw;
+                    }
+
+                    return RedirectToAction("Index", "Login");
+                }
+            }
+            else
+            {
+                TempData["user-exists"] = "Uživatelské jméno již existuje";
+                return RedirectToAction("Index", "Login");
+            }
 
             return RedirectToAction("Index", "Login");
         }
