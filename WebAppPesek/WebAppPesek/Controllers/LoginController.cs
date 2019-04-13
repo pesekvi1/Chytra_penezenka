@@ -52,7 +52,7 @@ namespace WebAppPesek.Controllers
             if (!uzivatelDao.DoesUsernameExists(uzivatel.Login))
             {
                 UzivatelskaRoleDao uzivatelskaRoleDao = new UzivatelskaRoleDao();
-                UzivatelskaRole role = uzivatelskaRoleDao.getRoleWithName("admin");
+                UzivatelskaRole role = uzivatelskaRoleDao.GetRoleWithName("admin");
                 uzivatelskaRoleDao.CloseSession();
 
                 uzivatel.Skupina = null;

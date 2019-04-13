@@ -46,7 +46,7 @@ namespace WebAppPesek.Controllers
             skupinaDao.CloseSession();
 
             UzivatelskaRoleDao uzivatelskaRoleDao = new UzivatelskaRoleDao();
-            UzivatelskaRole role = uzivatelskaRoleDao.getRoleWithName("uzivatel");
+            UzivatelskaRole role = uzivatelskaRoleDao.GetRoleWithName("uzivatel");
             uzivatelskaRoleDao.CloseSession();
 
             UzivatelDao uzivatelDao = new UzivatelDao();
