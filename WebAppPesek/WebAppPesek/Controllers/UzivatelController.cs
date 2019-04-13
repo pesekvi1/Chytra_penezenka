@@ -40,6 +40,12 @@ namespace WebAppPesek.Controllers
         [HttpPost]
         public ActionResult Vytvorit(Uzivatel uzivatel, int skupinaId)
         {
+            UzivatelDao uzivatelDao = new UzivatelDao();
+            if (uzivatelDao.DoesUsernameExists(uzivatel.Login))
+            {
+                TempData["error-message"] = "Uživatel s tímto uživ. jménem již existuje";
+                return RedirectToAction("PridatUzivatele");
+            }
 
             SkupinaDao skupinaDao = new SkupinaDao();
             Skupina skupina = skupinaDao.GetById(skupinaId);
@@ -49,7 +55,6 @@ namespace WebAppPesek.Controllers
             UzivatelskaRole role = uzivatelskaRoleDao.GetRoleWithName("uzivatel");
             uzivatelskaRoleDao.CloseSession();
 
-            UzivatelDao uzivatelDao = new UzivatelDao();
             Uzivatel admin = uzivatelDao.GetByLogin(User.Identity.Name);
             uzivatel.Skupina = skupina;
             uzivatel.Vytvoril = admin;
