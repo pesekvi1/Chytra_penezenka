@@ -41,27 +41,72 @@
     <link href="@Url.Content("~/Content/signin.css")" rel="stylesheet">
 </head>
 <body class="text-center">
-
-    @using (Html.BeginForm("SignIn", "Login", FormMethod.Post, new { @class = "form-signin" }))
-    {
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="inputEmail" class="sr-only">Login</label>
-        <input type="text" name="login" id="inputEmail" class="form-control" placeholder="Uzivatel">
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password">
-
-        if (TempData["error-message"] != null)
+    <div class="form-signin">
+        <img class="mb-4" src="@Url.Content("~/Content/wallet-oriznuta.png")"/>
+        @if (TempData["user-exists"] != null)
         {
-            <span class="text-danger">@TempData["error-message"]</span>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @TempData["user-exists"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         }
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
+        @using (Html.BeginForm("SignIn", "Login", FormMethod.Post, new { }))
+        {
 
-    }
+            <label for="inputEmail" class="sr-only">Login</label>
+            <input type="text" name="login" id="inputEmail" class="form-control" placeholder="uživatel" required="">
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="heslo" required="">
+
+            if (TempData["user-error-message"] != null)
+             {
+                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                     @TempData["user-error-message"]
+                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                     </button>
+                 </div>
+             }
+
+            <button class="btn btn-lg btn-outline-primary btn-block" type="submit">Přihlásit se</button>
+
+            <a href="" data-toggle="modal" data-target="#exampleModalCenter">
+                Nemáte účet? Registrujte se zdarma.
+            </a>
+
+            <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
+
+        }
+    </div>
 
 
+    <!-- Button trigger modal -->
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Vytvoření účtu</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @{
+                    Html.RenderAction("Registration", "Login");
+                }
+            </div>
+        </div>
+    </div>
 
+
+    <script src="@Url.Content("~/Scripts/jquery-3.3.1.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.bundle.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
 </body>
 </html>
 
