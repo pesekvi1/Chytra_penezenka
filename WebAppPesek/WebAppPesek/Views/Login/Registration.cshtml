@@ -1,0 +1,40 @@
+﻿@using DataAccess.Model
+@model Uzivatel
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("SignUp", "Login", FormMethod.Post, new { }))
+{
+    <div class="modal-body">
+
+        <div class="form-group">
+            <label>Jméno</label>
+            @Html.TextBoxFor(a => a.Jmeno, new { @class = "form-control" })
+            @Html.ValidationMessageFor(a => a.Jmeno, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label>Příjmení</label>
+            @Html.TextBoxFor(a => a.Prijmeni, new { @class = "form-control" })
+            @Html.ValidationMessageFor(a => a.Prijmeni, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label>Uživatelské jméno</label>
+            @Html.TextBoxFor(a => a.Login, new { @class = "form-control" })
+            @Html.ValidationMessageFor(a => a.Login, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label>Heslo</label>
+            @Html.TextBoxFor(a => a.Heslo, new { @type = "password", @class = "form-control" })
+            @Html.ValidationMessageFor(a => a.Heslo, "", new { @class = "text-danger" })
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>
+        <button type="submit" class="btn btn-primary">Registrovat</button>
+    </div>
+}
