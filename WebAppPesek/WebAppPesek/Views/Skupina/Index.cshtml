@@ -13,28 +13,30 @@
 }
 else
 {
-    <table class="table table-bordered table-hover col-md-6 text-center">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nazev skupiny</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (Skupina s in ViewBag.MeSkupiny)
-            {
+    <div class="my-table">
+        <table class="table table-bordered table-hover col-md-6 text-center">
+            <thead>
                 <tr>
-                    <td>@s.Id</td>
-                    <td>@Html.ActionLink(s.Nazev, "Detail", "Skupina", new { id = s.Id }, new { title = s.Nazev })</td>
-                    <td>
-                        @Html.ActionLink("Edit", "Editace", "Skupina", new { id = s.Id }, new { title = s.Nazev })
-                        @Html.ActionLink("Delete", "Odstranit", "Skupina", new { id = s.Id }, new { onclick = "return confirm('prejete si opravdu smazat skupinu " + s.Nazev + "');" })
-                    </td>
+                    <th>ID</th>
+                    <th>Nazev skupiny</th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (Skupina s in ViewBag.MeSkupiny)
+                {
+                    <tr>
+                        <td>@s.Id</td>
+                        <td>@Html.ActionLink(s.Nazev, "Detail", "Skupina", new { id = s.Id }, new { title = s.Nazev })</td>
+                        <td>
+                            @Html.ActionLink("Edit", "Editace", "Skupina", new { id = s.Id }, new { title = s.Nazev })
+                            @Html.ActionLink("Delete", "Odstranit", "Skupina", new { id = s.Id }, new { onclick = "return confirm('prejete si opravdu smazat skupinu " + s.Nazev + "');" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }
 
 
