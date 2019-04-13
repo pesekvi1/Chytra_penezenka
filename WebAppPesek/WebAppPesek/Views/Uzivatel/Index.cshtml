@@ -6,7 +6,7 @@
 
 <h2 class="mt-4">Výpis uživatelů</h2>
 
-@Html.ActionLink("Přidat uživatele", "PridatUzivatee", "Uzivatel")
+@Html.ActionLink("Přidat uživatele", "PridatUzivatele", "Uzivatel")
 
 <table class="table table-bordered table-hover col-6 text-center">
     <thead>
@@ -25,7 +25,7 @@
                 <td>@u.Id</td>
                 <td>@u.Jmeno</td>
                 <td>@u.Prijmeni</td>
-                <td>@u.Role.Nazev</td>
+                <td>@u.Role.Popis</td>
                 <td>@Html.ActionLink("Delete", "Odstranit", "Uzivatel", new { id = u.Id }, new { onclick = "return confirm('prejete si opravdu smazat uživatele " + u.Jmeno + "');" })</td>
             </tr>
         }
