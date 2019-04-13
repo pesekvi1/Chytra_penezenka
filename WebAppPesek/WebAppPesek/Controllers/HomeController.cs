@@ -19,7 +19,7 @@ namespace WebAppPesek.Controllers
         public ActionResult Uzivatel()
         {
             UzivatelDao uzivatelDao = new UzivatelDao();
-            Uzivatel uzivatel = uzivatelDao.getByLogin(User.Identity.Name);
+            Uzivatel uzivatel = uzivatelDao.GetByLogin(User.Identity.Name);
 
             return View(uzivatel);
         }

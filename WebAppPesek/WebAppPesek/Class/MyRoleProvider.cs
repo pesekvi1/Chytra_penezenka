@@ -13,7 +13,7 @@ namespace WebAppPesek.Class
         public override bool IsUserInRole(string username, string roleName)
         {
             UzivatelDao userDao = new UzivatelDao();
-            Uzivatel user = userDao.getByLogin(username);
+            Uzivatel user = userDao.GetByLogin(username);
 
             if (user == null)
             {
@@ -26,7 +26,7 @@ namespace WebAppPesek.Class
         public override string[] GetRolesForUser(string username)
         {
             UzivatelDao userDao = new UzivatelDao();
-            Uzivatel user = userDao.getByLogin(username);
+            Uzivatel user = userDao.GetByLogin(username);
             if (user == null)
             {
                 return new string[] { };

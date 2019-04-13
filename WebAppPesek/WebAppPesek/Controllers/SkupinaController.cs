@@ -15,7 +15,7 @@ namespace WebAppPesek.Controllers
         public ActionResult Index()
         {
             UzivatelDao uzivatelDao = new UzivatelDao();
-            Uzivatel uzivatel = uzivatelDao.getByLogin(User.Identity.Name);
+            Uzivatel uzivatel = uzivatelDao.GetByLogin(User.Identity.Name);
             SkupinaDao skupinaDao = new SkupinaDao();
             //IList<Skupina> skupiny = skupinaDao.getMyGroups(uzivatel);
             IList<Skupina> skupiny = skupinaDao.getMyGroups(uzivatel);
@@ -42,7 +42,7 @@ namespace WebAppPesek.Controllers
         public ActionResult PridaniSkupiny(Skupina skupina)
         {
             UzivatelDao uzivatelDao = new UzivatelDao();
-            Uzivatel uzivatel = uzivatelDao.getByLogin(User.Identity.Name);
+            Uzivatel uzivatel = uzivatelDao.GetByLogin(User.Identity.Name);
 
             skupina.Zakladatel = uzivatel;
             

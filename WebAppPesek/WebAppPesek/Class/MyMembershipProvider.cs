@@ -45,7 +45,7 @@ namespace WebAppPesek.Class
         public override bool ValidateUser(string username, string password)
         {
             UzivatelDao userDao = new UzivatelDao();
-            Uzivatel user = userDao.getByLoginAndPassword(username, password);
+            Uzivatel user = userDao.GetByLoginAndPassword(username, password);
 
             return user != null;
         }
