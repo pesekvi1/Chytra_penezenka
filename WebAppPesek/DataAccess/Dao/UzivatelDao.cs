@@ -46,7 +46,10 @@ namespace DataAccess.Dao
             IList<Uzivatel> uzivatele = new UzivatelDao().GetAll();
             foreach (var uzivatel in uzivatele)
             {
-                return uzivatel.Login == username;
+                if (uzivatel.Login == username)
+                {
+                    return true;
+                }
             }
 
             return false;
