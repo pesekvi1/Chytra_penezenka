@@ -58,3 +58,7 @@ body {
 .home-page:hover {
     text-decoration: none
 }
+
+.my-table {
+    overflow-x: auto;
+}
