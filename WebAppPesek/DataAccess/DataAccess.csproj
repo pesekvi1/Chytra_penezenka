@@ -117,8 +117,11 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Primitives.2.0.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate, Version=5.2.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\packages\NHibernate.5.2.4\lib\net461\NHibernate.dll</HintPath>
+      <HintPath>..\packages\NHibernate.5.2.5\lib\net461\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
       <HintPath>..\packages\Remotion.Linq.2.2.0\lib\net45\Remotion.Linq.dll</HintPath>
@@ -145,6 +148,21 @@
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.4\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -154,12 +172,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dao\ModelVozidlaDao.cs" />
+    <Compile Include="Dao\PolozkaRozpoctuDao.cs" />
+    <Compile Include="Dao\RozpocetDao.cs" />
+    <Compile Include="Dao\SkupinaDao.cs" />
     <Compile Include="Dao\UzivatelDao.cs" />
     <Compile Include="Dao\UzivatelskaRoleDao.cs" />
     <Compile Include="Dao\VozidloDao.cs" />
     <Compile Include="Dao\VyrobceDao.cs" />
     <Compile Include="Mappings\ModelVozidlaMap.cs" />
     <Compile Include="Mappings\PersonMap.cs" />
+    <Compile Include="Mappings\PolozkaRozpoctuMap.cs" />
+    <Compile Include="Mappings\RozpocetMap.cs" />
+    <Compile Include="Mappings\SkupinaMap.cs" />
     <Compile Include="Mappings\UzivatelMap.cs" />
     <Compile Include="Mappings\UzivatelskaRoleMap.cs" />
     <Compile Include="Mappings\VozidloMap.cs" />
@@ -173,6 +197,7 @@
     <Compile Include="Model\ModelVozidla.cs" />
     <Compile Include="Model\Person.cs" />
     <Compile Include="Model\PolozkaRozpoctu.cs" />
+    <Compile Include="Model\Skupina.cs" />
     <Compile Include="Model\UzivatelskaRole.cs" />
     <Compile Include="Model\Rozpocet.cs" />
     <Compile Include="Model\ServisniZaznam.cs" />
