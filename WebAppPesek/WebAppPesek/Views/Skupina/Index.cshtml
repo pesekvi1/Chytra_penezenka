@@ -5,7 +5,15 @@
 
 <h2 class="mt-4">Skupiny</h2>
 
-<div>@Html.ActionLink("Vytvoreni skupiny", "VytvoreniSkupiny", "Skupina")</div>
+<div>
+    <a href="@Url.Action("VytvoreniSkupiny", "Skupina")">
+        <button class="btn btn-secondary">Pridani nove skupiny</button>
+    </a>
+</div>
+
+<p>
+    <span></span>
+</p>
 
 @if (ViewBag.ListJePrazdny)
 {
@@ -13,13 +21,15 @@
 }
 else
 {
-    <div class="my-table">
-        <table class="table table-bordered table-hover col-md-6 text-center">
+
+    <div class="table-responsive-sm">
+        <table class="table table-bordered table-hover text-center table-sm">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Nazev skupiny</th>
-                    <th></th>
+                    <th>Identifikátor</th>
+                    <th>Název skupiny</th>
+                    <th>Uživatelé</th>
+                    <th>Akce</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,10 +37,17 @@ else
                 {
                     <tr>
                         <td>@s.Id</td>
-                        <td>@Html.ActionLink(s.Nazev, "Detail", "Skupina", new { id = s.Id }, new { title = s.Nazev })</td>
-                        <td>
-                            @Html.ActionLink("Edit", "Editace", "Skupina", new { id = s.Id }, new { title = s.Nazev })
-                            @Html.ActionLink("Delete", "Odstranit", "Skupina", new { id = s.Id }, new { onclick = "return confirm('prejete si opravdu smazat skupinu " + s.Nazev + "');" })
+                        <td>@s.Nazev</td>
+                        <td><a class="icon-link" href="@Url.Action("Editace", "Skupina", new {id = s.Id})">
+                            <span class="fa fa-lg fa-users"></span>
+                        </a></td>
+                        <td class="text-justify">
+                            <a class="icon-link" href="@Url.Action("Editace", "Skupina", new {id = s.Id})">
+                                <span class="fa fa-lg fa-edit icon-orange"></span>
+                            </a>
+                            <a class="icon-link" href="@Url.Action("Odstranit", "Skupina", new {id = s.Id})" onclick="return confirm('Přejete si opravdu smazat skupinu s názvem @s.Nazev?')">
+                                <span class="fa fa-lg fa-trash icon-red"></span>
+                            </a>
                         </td>
                     </tr>
                 }
