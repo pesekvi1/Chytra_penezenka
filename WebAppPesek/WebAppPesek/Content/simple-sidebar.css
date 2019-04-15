@@ -62,3 +62,24 @@ body {
 .my-table {
     overflow-x: auto;
 }
+
+.icon-green {
+    color: green;
+}
+
+.icon-red {
+    color: red;
+}
+
+.icon-orange {
+    color: orangered;
+}
+
+.icon-link {
+    color: black;
+    text-decoration: none;
+}
+
+.icon-link:hover {
+    text-decoration: none
+}
