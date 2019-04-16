@@ -114,5 +114,16 @@ namespace WebAppPesek.Controllers
         {
             return View();
         }
+
+        public ActionResult OdstranitUzivateleZeSkupiny(int uzivatelId, int skupinaId)
+        {
+            UzivatelDao uzivatelDao = new UzivatelDao();
+            Uzivatel uzivatel = uzivatelDao.GetById(uzivatelId);
+            uzivatel.Skupina = null;
+            uzivatelDao.Update(uzivatel);
+            TempData["message-success"] =
+                "Uživatel " + uzivatel.Jmeno + " " + uzivatel.Prijmeni + " byl úspěšně odebrán ze skupiny";
+        return RedirectToAction("Detail", new {id = skupinaId});
+        }
     }
 }
