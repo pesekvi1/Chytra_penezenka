@@ -52,11 +52,12 @@ body {
 }
 .home-page {
     text-decoration: none;
-    color: black;
+    color: white;
     text-underline: none;
 }
 .home-page:hover {
-    text-decoration: none
+    text-decoration: none;
+    color: grey;
 }
 
 .my-table {
