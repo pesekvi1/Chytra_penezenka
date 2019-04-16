@@ -1,19 +1,22 @@
 ﻿@using DataAccess.Model
 @{
-    //ViewBag.Title = "Detail";
+    ViewBag.Title = "Detail skupiny";
 }
 
 <h2 class="mt-4">Detail</h2>
-<p>
-    <a href="@Url.Action("Index", "Skupina")">Zpět na výpis</a>
-</p>
-<div class="my-table">
-<table class="table table-bordered table-hover col-6 text-center">
+
+<a class="icon-link" href="@Url.Action("Index", "Skupina")">
+    <span class="fas fa-arrow-left fa-2x"></span>
+</a>
+<p></p>
+<div class="table-responsive">
+<table class="table table-bordered table-hover text-center table-sm">
     <thead>
     <tr>
         <th>ID</th>
         <th>Jmeno</th>
         <th>Prijmeni</th>
+        <th>Akce</th>
     </tr>
     </thead>
     <tbody>
@@ -23,6 +26,11 @@
             <td>@u.Id</td>
             <td>@u.Jmeno</td>
             <td>@u.Prijmeni</td>
+            <td>
+                <a class="icon-link" href="@Url.Action("OdstranitUzivateleZeSkupiny", "Skupina", new {uzivatelId = u.Id, skupinaId = u.Skupina.Id})" onclick="return confirm('Přejete si opravdu odebrat uživatele @u.Jmeno @u.Prijmeni ze skupiny?')">
+                    <span class="fas fa-lg fa-user-minus icon-red"></span>
+                </a>
+            </td>
         </tr>
     }
     </tbody>

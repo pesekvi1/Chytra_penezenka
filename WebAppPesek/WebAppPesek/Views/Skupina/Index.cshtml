@@ -5,11 +5,10 @@
 
 <h2 class="mt-4">Skupiny</h2>
 
-<div>
-    <a href="@Url.Action("VytvoreniSkupiny", "Skupina")">
-        <button class="btn btn-secondary">Pridani nove skupiny</button>
-    </a>
-</div>
+<a class="icon-link" href="@Url.Action("VytvoreniSkupiny", "Skupina")">
+    <span class="fas fa-plus-square fa-2x"></span>
+</a>
+<p></p>
 
 <p>
     <span></span>
@@ -28,7 +27,6 @@ else
                 <tr>
                     <th>Identifikátor</th>
                     <th>Název skupiny</th>
-                    <th>Uživatelé</th>
                     <th>Akce</th>
                 </tr>
             </thead>
@@ -38,10 +36,10 @@ else
                     <tr>
                         <td>@s.Id</td>
                         <td>@s.Nazev</td>
-                        <td><a class="icon-link" href="@Url.Action("Editace", "Skupina", new {id = s.Id})">
-                            <span class="fa fa-lg fa-users"></span>
-                        </a></td>
-                        <td class="text-justify">
+                        <td class="text-center">
+                            <a class="icon-link" href="@Url.Action("Detail", "Skupina", new {id = s.Id})">
+                                <span class="fa fa-lg fa-users"></span>
+                            </a>
                             <a class="icon-link" href="@Url.Action("Editace", "Skupina", new {id = s.Id})">
                                 <span class="fa fa-lg fa-edit icon-orange"></span>
                             </a>
