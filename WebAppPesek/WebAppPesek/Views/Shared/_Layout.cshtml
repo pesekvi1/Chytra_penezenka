@@ -10,37 +10,38 @@
     <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="@Url.Content("~/Content/simple-sidebar.css")" rel="stylesheet">
-    <link href="@Url.Content("~/AwesomeFont/css/font-awesome.min.css")" rel="stylesheet" />
     
     <!--Awesome font CSS files-->
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/solid.css" integrity="sha384-QokYePQSOwpBDuhlHOsX0ymF6R/vLk/UQVz3WHa6wygxI5oGTmDTv8wahFOSspdm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/regular.css" integrity="sha384-FKw7x8fCxuvzBwOJmhTJJsKzBl8dnN9e2R4+pXRfYoHivikuHkzWyhKWDSMcGNK8" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/brands.css" integrity="sha384-n9+6/aSqa9lBidZMRCQHTHKJscPq6NW4pCQBiMmHdUCvPN8ZOg2zJJTkC7WIezWv" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/fontawesome.css" integrity="sha384-vd1e11sR28tEK9YANUtpIOdjGW14pS87bUBuOIoBILVWLFnS+MCX9T6MMf0VdPGq" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/solid.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/regular.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/brands.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/fontawesome.css" />
+    <!--For IntelliSense reasons-->
+    <link href="@Url.Content("~/Content/font-awesome.css")" rel="stylesheet" />
 </head>
 <body>
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
-        <div class="bg-light border-right" id="sidebar-wrapper">
-            <div class="sidebar-heading">@Html.ActionLink("Evidence výdajů", "Index", "Home", new { }, new { @class = "home-page" }) </div>
+        <div class="bg-dark border-dark" id="sidebar-wrapper">
+            <div class="sidebar-heading bg-dark border-dark">@Html.ActionLink("Evidence výdajů", "Index", "Home", new { }, new { @class = "home-page" }) </div>
             <div class="list-group list-group-flush">
-                <a href="@Url.Action("Index", "Skupina")" class="list-group-item list-group-item-action bg-light">Skupiny</a>
-                <a href="@Url.Action("Index","Uzivatel")" class="list-group-item list-group-item-action bg-light">Uživatelé</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">Overview</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>
+                <a href="@Url.Action("Index", "Skupina")" class="list-group-item list-group-item-action text-white bg-dark">Skupiny</a>
+                <a href="@Url.Action("Index","Uzivatel")" class="list-group-item list-group-item-action text-white bg-dark">Uživatelé</a>
+                <a href="#" class="list-group-item list-group-item-action text-white bg-dark">Overview</a>
+                <a href="#" class="list-group-item list-group-item-action text-white bg-dark">Events</a>
+                <a href="#" class="list-group-item list-group-item-action text-white bg-dark">Profile</a>
+                <a href="#" class="list-group-item list-group-item-action text-white bg-dark">Status</a>
             </div>
         </div>
         <!-- /#sidebar-wrapper -->
         <!-- Page Content -->
         <div id="page-content-wrapper">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                <button class="btn btn-light" id="menu-toggle">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-dark">
+                <button class="btn btn-dark" id="menu-toggle">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <button class="navbar-toggler btn btn-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler btn btn-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <!--<span class="navbar-toggler-icon"></span>-->
                     <span>Uživatel</span>
                 </button>
