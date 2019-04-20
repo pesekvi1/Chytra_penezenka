@@ -9,7 +9,7 @@ using DataAccess.Model;
 
 namespace WebAppPesek.Controllers
 {
-    public class LoginController : Controller
+    public class LoginController : BaseController
     {
         // GET: Login
         public ActionResult Index()
@@ -23,7 +23,6 @@ namespace WebAppPesek.Controllers
             if (Membership.ValidateUser(login, password))
             {
                 FormsAuthentication.SetAuthCookie(login, false);
-                Session["user_id"] = login;
                 return RedirectToAction("Index", "Home");
             }
 

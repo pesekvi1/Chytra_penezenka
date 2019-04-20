@@ -84,3 +84,12 @@ body {
 .icon-link:hover {
     text-decoration: none
 }
+
+.dropdown-item:focus {
+    background-color: #1d2124;
+}
+
+input:focus {
+    border-color: #cfdc00;
+    box-shadow: 0 0 5px rgba(207, 220, 0, 0.4);
+}

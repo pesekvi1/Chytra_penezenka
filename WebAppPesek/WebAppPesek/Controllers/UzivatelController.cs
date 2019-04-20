@@ -10,7 +10,7 @@ using DataAccess.Model;
 
 namespace WebAppPesek.Controllers
 {
-    public class UzivatelController : Controller
+    public class UzivatelController : BaseController
     {
         // GET: Uzivatel
         public ActionResult Index()

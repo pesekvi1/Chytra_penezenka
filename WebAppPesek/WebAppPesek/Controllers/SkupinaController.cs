@@ -9,7 +9,7 @@ using DataAccess.Model;
 namespace WebAppPesek.Controllers
 {
     [Authorize]
-    public class SkupinaController : Controller
+    public class SkupinaController : BaseController
     {
         // GET: Skupina
         public ActionResult Index()

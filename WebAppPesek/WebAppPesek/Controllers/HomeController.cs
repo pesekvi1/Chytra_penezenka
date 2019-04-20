@@ -9,7 +9,7 @@ using DataAccess.Model;
 namespace WebAppPesek.Controllers
 {
     [Authorize]
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public ActionResult Index()
         {
@@ -18,10 +18,7 @@ namespace WebAppPesek.Controllers
 
         public ActionResult Uzivatel()
         {
-            UzivatelDao uzivatelDao = new UzivatelDao();
-            Uzivatel uzivatel = uzivatelDao.GetByLogin(User.Identity.Name);
-
-            return View(uzivatel);
+            return View(LoggedUser);
         }
 
         public ActionResult About()
