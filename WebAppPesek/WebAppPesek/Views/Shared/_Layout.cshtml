@@ -10,12 +10,15 @@
     <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="@Url.Content("~/Content/simple-sidebar.css")" rel="stylesheet">
-    
+
+    <link href="@Url.Content("~/Content/bootstrap-datepicker.min.css")" rel="stylesheet" />
+    <script src="@Url.Content("~/Scripts/script.js")"></script>
+
     <!--Awesome font CSS files-->
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/solid.css"/>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/regular.css"/>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/brands.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/solid.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/regular.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/brands.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/fontawesome.css" />
     <!--For IntelliSense reasons-->
     <link href="@Url.Content("~/Content/font-awesome.css")" rel="stylesheet" />
@@ -28,7 +31,7 @@
             <div class="list-group list-group-flush">
                 <a href="@Url.Action("Index", "Skupina")" class="list-group-item list-group-item-action text-white bg-dark">Skupiny</a>
                 <a href="@Url.Action("Index","Uzivatel")" class="list-group-item list-group-item-action text-white bg-dark">Uživatelé</a>
-                <a href="#" class="list-group-item list-group-item-action text-white bg-dark">Overview</a>
+                <a href="@Url.Action("Index","Rozpocet")" class="list-group-item list-group-item-action text-white bg-dark">Rozpočty</a>
                 <a href="#" class="list-group-item list-group-item-action text-white bg-dark">Events</a>
                 <a href="#" class="list-group-item list-group-item-action text-white bg-dark">Profile</a>
                 <a href="#" class="list-group-item list-group-item-action text-white bg-dark">Status</a>
@@ -104,6 +107,11 @@
     <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
     <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
 
+    <script src="@Url.Content("~/Scripts/bootstrap-datepicker.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/locales/bootstrap-datepicker.cs.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/moment.min.js")"></script>
+
+
     <!--Awesome font JS files-->
 
     <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/solid.js" integrity="sha384-IA6YnujJIO+z1m4NKyAGvZ9Wmxrd4Px8WFqhFcgRmwLaJaiwijYgApVpo1MV8p77" crossorigin="anonymous"></script>
@@ -118,5 +126,24 @@
             $("#wrapper").toggleClass("toggled");
         });
     </script>
+
+    <script type="text/javascript">
+        $('.datepicker-item').datepicker({
+            format: "dd/mm/yyyy",
+            todayBtn: "linked",
+            clearBtn: true,
+            language: "cs",
+            autoclose: true,
+            todayHighlight: true
+        });
+
+        $(function () {
+            $.validator.methods.date = function (value, element) {
+                return this.optional(element) || moment(value, "DD/MM/YYYY", true).isValid();
+            }
+        });
+    </script>
+
+
 </body>
 </html>
