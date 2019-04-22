@@ -1,0 +1,43 @@
+﻿@using DataAccess.Model
+@model Uzivatel
+@{
+    ViewBag.Title = "Editace skupiny";
+}
+
+<h2 class="mt-4">Editace</h2>
+
+@using (Html.BeginForm("ZmenitUzivatele", "Uzivatel", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.Id)
+    @Html.HiddenFor(x => x.Heslo)
+    @Html.HiddenFor(x => x.Login)
+
+    <div class="form-group">
+        <label>Jmeno</label>
+        @Html.TextBoxFor(a => a.Jmeno, new { @class = "form-control col-sm-6" })
+        @Html.ValidationMessageFor(a => a.Jmeno, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label>Prijmeni</label>
+        @Html.TextBoxFor(a => a.Prijmeni, new { @class = "form-control col-sm-6" })
+        @Html.ValidationMessageFor(a => a.Prijmeni, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label>Skupina</label>
+        @if (Model.Skupina != null)
+        {
+            @Html.DropDownList("skupinaId", new SelectList(ViewBag.Skupiny, "Id", "Nazev", Model.Skupina.Id), new { @class = "form-control col-sm-6" })
+        }
+        else
+        {
+            @Html.DropDownList("skupinaId", new SelectList(ViewBag.Skupiny, "Id", "Nazev"), new { @class = "form-control col-sm-6" })
+        }
+    </div>
+
+    <button type="submit" class="btn btn-primary">Odeslat</button>
+}
+
+
+

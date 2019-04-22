@@ -77,5 +77,37 @@ namespace WebAppPesek.Controllers
             TempData["message-success"] = "Uživatel byl úspěšně odstraněn";
             return RedirectToAction("Index", "Uzivatel");
         }
+
+        public ActionResult Editace( int id)
+        {
+            UzivatelDao uzivatelDao = new UzivatelDao();
+            Uzivatel uzivatel = uzivatelDao.GetById(id);
+
+            SkupinaDao skupinaDao = new SkupinaDao();
+            IList<Skupina> skupiny = skupinaDao.getMyGroups(LoggedUser);
+            ViewBag.Skupiny = skupiny;
+            return View(uzivatel);
+        }
+
+        public ActionResult ZmenitUzivatele(Uzivatel uzivatel, int skupinaId)
+        {
+            UzivatelDao uzivatelDao = new UzivatelDao();
+            Uzivatel staryUzivatel = uzivatelDao.GetById(uzivatel.Id);
+
+            SkupinaDao skupinaDao = new SkupinaDao();
+            Skupina skupina = skupinaDao.GetById(skupinaId);
+            skupinaDao.CloseSession();
+            staryUzivatel.Skupina = skupina;
+            staryUzivatel.Jmeno = uzivatel.Jmeno;
+            staryUzivatel.Prijmeni = uzivatel.Prijmeni;
+
+            if (ModelState.IsValid)
+            {
+                uzivatelDao.Update(staryUzivatel);
+                TempData["message-success"] = "Uživatel byl úspěšne upraven";
+            }
+
+            return RedirectToAction("Index", "Uzivatel");
+        }
     }
 }
