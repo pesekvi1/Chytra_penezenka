@@ -1,0 +1,30 @@
+﻿@using DataAccess.Model
+@model Rozpocet
+@{
+    ViewBag.Title = "VytvoreniRozpoctu";
+}
+
+<h2>Vytvoreni Rozpoctu</h2>
+
+@using (Html.BeginForm("Pridani", "Rozpocet", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+        <label>Nazev</label>
+        @Html.TextBoxFor(a => a.Nazev, new { @class = "form-control col-sm-6" })
+        @Html.ValidationMessageFor(a => a.Nazev, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label>Platnost od</label>
+        @Html.TextBoxFor(a => a.PlatnyOd, "{0:dd/MM/yyyy", new { @class = "form-control col-sm-6 datepicker-item", @autocomplete = "off" })
+        @Html.ValidationMessageFor(a => a.PlatnyOd, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label>Platnost do</label>
+        @Html.TextBoxFor(a => a.PlatnyDo, "{0:dd/MM/yyyy HH:mm}", new { @class = "form-control col-sm-6 datepicker-item", @autocomplete = "off" })
+        @Html.ValidationMessageFor(a => a.PlatnyDo, "", new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Přidat uživatele</button>
+}

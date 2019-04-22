@@ -1,0 +1,42 @@
+﻿@using DataAccess.Model
+@model IList<Rozpocet>
+@{
+    ViewBag.Title = "Vypis";
+}
+
+<h2 class="mt-4">Rozpočty</h2>
+
+<a class="icon-link" href="@Url.Action("VytvoreniRozpoctu", "Rozpocet")">
+    <span class="fas fa-plus-square fa-2x"></span>
+</a>
+<p></p>
+
+@if (Model.Count == 0)
+{
+    <p>Dosud nemáte vytvořený žádny rozpočet</p>
+}
+else
+{
+    <div class="table-responsive-sm">
+        <table class="table table-bordered table-hover text-center table-sm">
+            <thead>
+                <tr>
+                    <th>Identifikátor</th>
+                    <th>Název rozpočtu</th>
+                    <th>Akce</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Rozpocet r in Model)
+                {
+                    <tr>
+                        <td>@r.Id</td>
+                        <td>@r.Nazev</td>
+                        <td class="text-center"></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
