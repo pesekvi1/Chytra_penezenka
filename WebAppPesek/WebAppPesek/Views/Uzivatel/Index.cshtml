@@ -14,9 +14,9 @@
     <table class="table table-bordered table-hover text-center table-sm">
         <thead>
             <tr>
-                <th>Identifikátor</th>
                 <th>Jméno</th>
                 <th>Příjmení</th>
+                <td>Skupina</td>
                 <th>Role</th>
                 <th>Akce</th>
             </tr>
@@ -25,9 +25,16 @@
             @foreach (Uzivatel u in ViewBag.Uzivatele)
             {
                 <tr>
-                    <td>@u.Id</td>
                     <td>@u.Jmeno</td>
                     <td>@u.Prijmeni</td>
+                    <td>@if (u.Skupina != null)
+                        {
+                            @u.Skupina.Nazev
+                        }
+                        else
+                        {
+                            <span class="text-danger">žádná</span>
+                        }</td>
                     <td>@u.Role.Popis</td>
                     <td class="text-justify">
                         <a class="icon-link" href="@Url.Action("Editace", "Uzivatel", new {id = u.Id})">
