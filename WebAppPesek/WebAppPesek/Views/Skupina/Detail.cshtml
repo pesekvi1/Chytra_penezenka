@@ -9,31 +9,41 @@
     <span class="fas fa-arrow-left fa-2x"></span>
 </a>
 <p></p>
-<div class="table-responsive">
-<table class="table table-bordered table-hover text-center table-sm">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Jmeno</th>
-        <th>Prijmeni</th>
-        <th>Akce</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (Uzivatel u in ViewBag.Uzivatele)
-    {
-        <tr>
-            <td>@u.Id</td>
-            <td>@u.Jmeno</td>
-            <td>@u.Prijmeni</td>
-            <td>
-                <a class="icon-link" href="@Url.Action("OdstranitUzivateleZeSkupiny", "Skupina", new {uzivatelId = u.Id, skupinaId = u.Skupina.Id})" onclick="return confirm('Přejete si opravdu odebrat uživatele @u.Jmeno @u.Prijmeni ze skupiny?')">
-                    <span class="fas fa-lg fa-user-minus icon-red"></span>
-                </a>
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
-</div>
+@if (ViewBag.Uzivatele.Count == 0)
+{
+    <p>
+        Ve skupině nejsou žádní uživatelé
+    </p>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover text-center table-sm">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Jmeno</th>
+                    <th>Prijmeni</th>
+                    <th>Akce</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Uzivatel u in ViewBag.Uzivatele)
+                {
+                    <tr>
+                        <td>@u.Id</td>
+                        <td>@u.Jmeno</td>
+                        <td>@u.Prijmeni</td>
+                        <td>
+                            <a class="icon-link" href="@Url.Action("OdstranitUzivateleZeSkupiny", "Skupina", new {uzivatelId = u.Id, skupinaId = u.Skupina.Id})" onclick="return confirm('Přejete si opravdu odebrat uživatele @u.Jmeno @u.Prijmeni ze skupiny?')">
+                                <span class="fas fa-lg fa-user-minus icon-red"></span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
 
