@@ -130,9 +130,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Class\MyMembershipProvider.cs" />
     <Compile Include="Class\MyRoleProvider.cs" />
+    <Compile Include="Class\RozpocetHelper.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PolozkaController.cs" />
     <Compile Include="Controllers\RozpocetController.cs" />
     <Compile Include="Controllers\SkupinaController.cs" />
     <Compile Include="Controllers\UzivatelController.cs" />
@@ -368,6 +370,11 @@
     <Content Include="Views\Uzivatel\Editace.cshtml" />
     <Content Include="Views\Rozpocet\Index.cshtml" />
     <Content Include="Views\Rozpocet\VytvoreniRozpoctu.cshtml" />
+    <Content Include="Views\Rozpocet\Detail.cshtml" />
+    <Content Include="Views\Polozka\PridatPolozku.cshtml" />
+    <Content Include="Views\Home\Menu.cshtml" />
+    <Content Include="Views\Rozpocet\Editace.cshtml" />
+    <Content Include="Views\Uzivatel\ZmenaHesla.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
