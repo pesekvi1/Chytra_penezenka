@@ -17,9 +17,14 @@ namespace DataAccess.Model
 
         public virtual Uzivatel Vlastnik { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public virtual DateTime PlatnyOd { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public virtual DateTime PlatnyDo { get; set; }
+
+        [RegularExpression(@"^\d+.\d{0,2}$", ErrorMessage = "Velikost rozpoctu může obsahovat maximálně 2 desetinné čárky")]
+        public virtual double Velikost { get; set; }
 
         public virtual IList<PolozkaRozpoctu> Polozky { get; set; }
     }
