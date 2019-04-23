@@ -1,0 +1,57 @@
+﻿@using DataAccess.Model
+@model Rozpocet
+@{
+    ViewBag.Title = "Detail";
+}
+
+<h2 class="mt-4">Detail rozpoctu <strong>@Model.Nazev</strong></h2>
+
+<a class="icon-link" href="@Url.Action("Index", "Rozpocet")">
+    <span class="fas fa-arrow-left fa-2x"></span>
+</a>
+<a class="icon-link" href="@Url.Action("PridatPolozku", "Polozka", new {rozpocetId = Model.Id})">
+    <span class="fas fa-plus-square fa-2x"></span>
+</a>
+
+@if (ViewBag.Polozky.Count == 0)
+{
+    <p>
+        Rozpocet nema zadne polozky
+    </p>
+}
+else
+{
+    <div class="progress" style="height: 20px;">
+        <div class="progress-bar" role="progressbar" style="width: @ViewBag.Zaplnenost%;" aria-valuenow="@ViewBag.Zaplnenost" aria-valuemin="0" aria-valuemax="100">@ViewBag.Zaplnenost%</div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover text-center table-sm">
+            <thead>
+            <tr>      
+                <th>Účel</th>
+                <th>Cena</th>
+                <th>Akce</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (PolozkaRozpoctu polozka in ViewBag.Polozky)
+            {
+                <tr>
+                    <td>@polozka.Ucel</td>
+                    <td>@polozka.Cena</td>
+                    <td>
+                        <a class="icon-link" href="@Url.Action("Odstranit", "Polozka", new {id = polozka.Id, rozpocetId = Model.Id})" onclick="return confirm('Přejete si opravdu odebrat polozku?')">
+                            <span class="fas fa-lg fa-trash-alt icon-red"></span>
+                        </a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <span>Celkem použito <strong>@ViewBag.Celkem Kč</strong></span>
+    </div>
+}
+

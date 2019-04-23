@@ -1,0 +1,38 @@
+﻿@model DataAccess.Model.Rozpocet
+@{
+    ViewBag.Title = "Editace";
+}
+
+<h2 class="mt-4">Editace</h2>
+
+@using (Html.BeginForm("ZmenaRozpoctu", "Rozpocet", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(x => x.Polozky)
+    @Html.HiddenFor(x => x.Vlastnik)
+    @Html.HiddenFor(x => x.Id)
+    <div class="form-group">
+        <label>Nazev</label>
+        @Html.TextBoxFor(a => a.Nazev, new { @class = "form-control col-sm-6" })
+        @Html.ValidationMessageFor(a => a.Nazev, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label>Velikost rozpoctu</label>
+        @Html.TextBoxFor(a => a.Velikost, new { @class = "form-control col-sm-6" })
+        @Html.ValidationMessageFor(a => a.Velikost, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label>Platnost od</label>
+        @Html.TextBoxFor(a => a.PlatnyOd, "{0:dd/MM/yyyy}", new { @class = "form-control col-sm-6 datepicker-item", @autocomplete = "off" })
+        @Html.ValidationMessageFor(a => a.PlatnyOd, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label>Platnost do</label>
+        @Html.TextBoxFor(a => a.PlatnyDo, "{0:dd/MM/yyyy}", new { @class = "form-control col-sm-6 datepicker-item", @autocomplete = "off" })
+        @Html.ValidationMessageFor(a => a.PlatnyDo, "", new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-dark">Odeslat</button>
+}
