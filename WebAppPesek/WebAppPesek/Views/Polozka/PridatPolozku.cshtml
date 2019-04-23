@@ -1,0 +1,25 @@
+﻿@model DataAccess.Model.PolozkaRozpoctu
+@{
+    ViewBag.Title = "Pridat Polozku";
+}
+
+<h2 class="mt-4">Pridat Polozku</h2>
+
+@using (Html.BeginForm("Vytvorit", "Polozka", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @InputExtensions.Hidden(Html, "rozpocetId", ViewBag.Rozpocet)
+
+    <div class="form-group">
+        <label>Účel</label>
+        @Html.TextBoxFor(a => a.Ucel, new { @class = "form-control col-sm-6" })
+        @Html.ValidationMessageFor(a => a.Ucel, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label>Cena</label>
+        @Html.TextBoxFor(a => a.Cena, new { @class = "form-control col-sm-6" })
+        @Html.ValidationMessageFor(a => a.Cena, "", new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Přidat položku</button>
+}
