@@ -25,5 +25,15 @@ namespace WebAppPesek.Controllers
             }
             set => _loggedUser = value;
         }
+
+        public void Success(string text)
+        {
+            TempData["message-success"] = text;
+        }
+
+        public void Error(string text)
+        {
+            TempData["error-message"] = text;
+        }
     }
 }

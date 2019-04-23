@@ -21,6 +21,11 @@ namespace WebAppPesek.Controllers
             return View(LoggedUser);
         }
 
+        public ActionResult Menu()
+        {
+            return View(LoggedUser);
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

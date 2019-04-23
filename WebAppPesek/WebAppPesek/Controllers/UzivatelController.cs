@@ -78,7 +78,7 @@ namespace WebAppPesek.Controllers
             return RedirectToAction("Index", "Uzivatel");
         }
 
-        public ActionResult Editace( int id)
+        public ActionResult Editace(int id)
         {
             UzivatelDao uzivatelDao = new UzivatelDao();
             Uzivatel uzivatel = uzivatelDao.GetById(id);
@@ -108,6 +108,38 @@ namespace WebAppPesek.Controllers
             }
 
             return RedirectToAction("Index", "Uzivatel");
+        }
+
+        public ActionResult ZmenaHesla()
+        {
+            return View();
+        }
+
+        public ActionResult ZmenitHeslo(string stareHeslo, string noveHeslo, string noveHesloZnovu)
+        {
+            UzivatelDao uzivatelDao = new UzivatelDao();
+            if (Crypto.VerifyHashedPassword(LoggedUser.Heslo, stareHeslo))
+            {
+                if (noveHeslo == noveHesloZnovu)
+                {
+                    if (ModelState.IsValid)
+                    {
+                        LoggedUser.Heslo = Crypto.HashPassword(noveHeslo);
+                        uzivatelDao.Update(LoggedUser);
+                        Success("Heslo úspěšně změněno");
+                    }
+                }
+                else
+                {
+                    Error("Nová hesla se neshodují");
+                }
+            }
+            else
+            {
+                Error("Zadali jste špatné původní heslo");
+            }
+
+            return RedirectToAction("ZmenaHesla");
         }
     }
 }

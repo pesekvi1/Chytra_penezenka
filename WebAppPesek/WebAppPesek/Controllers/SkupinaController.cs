@@ -8,10 +8,9 @@ using DataAccess.Model;
 
 namespace WebAppPesek.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "admin")]
     public class SkupinaController : BaseController
     {
-        // GET: Skupina
         public ActionResult Index()
         {
             UzivatelDao uzivatelDao = new UzivatelDao();
