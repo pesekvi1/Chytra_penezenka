@@ -7,7 +7,7 @@ using DataAccess.Model;
 
 namespace DataAccess.Dao
 {
-    class PolozkaRozpoctuDao : DaoBase<PolozkaRozpoctu>
+    public class PolozkaRozpoctuDao : DaoBase<PolozkaRozpoctu>
     {
     }
 }
