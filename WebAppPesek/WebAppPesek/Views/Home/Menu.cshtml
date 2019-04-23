@@ -1,0 +1,17 @@
+﻿@model DataAccess.Model.Uzivatel
+@{
+    Layout = null;
+}
+
+<div class="bg-dark border-dark" id="sidebar-wrapper">
+    <div class="sidebar-heading bg-dark border-dark">@Html.ActionLink("Evidence výdajů", "Index", "Home", new { }, new { @class = "home-page" }) </div>
+    <div class="list-group list-group-flush">
+        @if (Model.Role.Nazev == "admin")
+        {
+            <a href="@Url.Action("Index", "Skupina")" class="list-group-item list-group-item-action text-white bg-dark">Skupiny</a>
+            <a href="@Url.Action("Index", "Uzivatel")" class="list-group-item list-group-item-action text-white bg-dark">Uživatelé</a>
+        }
+        
+        <a href="@Url.Action("Index", "Rozpocet")" class="list-group-item list-group-item-action text-white bg-dark">Moje rozpočty</a>
+       </div>
+</div>
