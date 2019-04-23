@@ -4,7 +4,7 @@
     ViewBag.Title = "VytvoreniRozpoctu";
 }
 
-<h2>Vytvoreni Rozpoctu</h2>
+<h2 class="mt-4">Vytvoreni Rozpoctu</h2>
 
 @using (Html.BeginForm("Pridani", "Rozpocet", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -12,6 +12,12 @@
         <label>Nazev</label>
         @Html.TextBoxFor(a => a.Nazev, new { @class = "form-control col-sm-6" })
         @Html.ValidationMessageFor(a => a.Nazev, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label>Velikost rozpoctu</label>
+        @Html.TextBoxFor(a => a.Velikost, new { @class = "form-control col-sm-6" })
+        @Html.ValidationMessageFor(a => a.Velikost, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">
@@ -26,5 +32,5 @@
         @Html.ValidationMessageFor(a => a.PlatnyDo, "", new { @class = "text-danger" })
     </div>
 
-    <button type="submit" class="btn btn-primary">Přidat uživatele</button>
+    <button type="submit" class="btn btn-dark">Přidat rozpočet</button>
 }
