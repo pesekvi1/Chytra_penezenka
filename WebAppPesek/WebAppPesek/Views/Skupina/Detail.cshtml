@@ -21,9 +21,8 @@ else
         <table class="table table-bordered table-hover text-center table-sm">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Jmeno</th>
-                    <th>Prijmeni</th>
+                    <th>Jméno</th>
+                    <th>Příjmení</th>
                     <th>Akce</th>
                 </tr>
             </thead>
@@ -31,7 +30,6 @@ else
                 @foreach (Uzivatel u in ViewBag.Uzivatele)
                 {
                     <tr>
-                        <td>@u.Id</td>
                         <td>@u.Jmeno</td>
                         <td>@u.Prijmeni</td>
                         <td>

@@ -1,7 +1,7 @@
 ﻿@using DataAccess.Model
 @model Skupina
 @{
-    ViewBag.Title = "Editace skupinz";
+    ViewBag.Title = "Editace skupiny";
 }
 
 <h2>Editace</h2>
@@ -18,27 +18,33 @@
         @Html.ValidationMessageFor(a => a.Nazev, "", new { @class = "text-danger" })
     </div>
 
-    <table class="table table-bordered table-hover col-6 text-center">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Jmeno</th>
-            <th>Prijmeni</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (Uzivatel u in ViewBag.Uzivatele)
-        {
-            <tr>
-                <td>@u.Id</td>
-                <td>@u.Jmeno</td>
-                <td>@u.Prijmeni</td>
-            </tr>
-        }
-        </tbody>
-    </table>
+    <div class="table-responsive-sm">
+        <table class="table table-bordered table-hover text-center table-sm">
+            <thead>
+                <tr>
+                    <th>Jméno</th>
+                    <th>Příjmení</th>
+                    <th>Akce</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Uzivatel u in ViewBag.Uzivatele)
+                {
+                    <tr>
+                        <td>@u.Jmeno</td>
+                        <td>@u.Prijmeni</td>
+                        <td>
+                            <a class="icon-link" href="@Url.Action("OdstranitUzivateleZeSkupiny", "Skupina", new {uzivatelId = u.Id, skupinaId = u.Skupina.Id})" onclick="return confirm('Přejete si opravdu odebrat uživatele @u.Jmeno @u.Prijmeni ze skupiny?')">
+                                <span class="fas fa-lg fa-user-minus icon-red"></span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 
-    <button type="submit" class="btn btn-primary">Odeslat</button>
+    <button type="submit" class="btn btn-dark">Odeslat</button>
 }
 
 
