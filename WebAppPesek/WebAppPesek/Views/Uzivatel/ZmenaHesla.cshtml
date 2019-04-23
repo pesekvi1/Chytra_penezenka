@@ -1,0 +1,29 @@
+﻿@model DataAccess.Model.Uzivatel
+@{
+    ViewBag.Title = "ZmenaHesla";
+}
+
+<h2 class="mt-4">Změna hesla</h2>
+
+@using (Html.BeginForm("ZmenitHeslo", "Uzivatel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+        <label>Staré heslo</label>
+        <input type="password" name="stareHeslo" class="form-control col-sm-6" />
+        @Html.ValidationMessageFor(a => a.Heslo, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label>Nové heslo</label>
+        <input type="password" name="noveHeslo" class="form-control col-sm-6" />
+        @Html.ValidationMessageFor(a => a.Heslo, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label>Nové heslo znovu</label>
+        <input type="password" name="noveHesloZnovu" class="form-control col-sm-6" />
+        @Html.ValidationMessageFor(a => a.Heslo, "", new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-dark">Změnit heslo</button>
+}
