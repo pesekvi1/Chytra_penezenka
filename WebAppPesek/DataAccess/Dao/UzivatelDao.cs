@@ -41,6 +41,30 @@ namespace DataAccess.Dao
             return session.CreateCriteria<Uzivatel>().Add(Restrictions.Eq("Vytvoril", vytvoril)).List<Uzivatel>();
         }
 
+        public IList<Uzivatel> GetUsersForAdminPaged(Uzivatel vytvoril, int count, int page, out int totalItems)
+        {
+            totalItems = session.CreateCriteria<Uzivatel>()
+                .Add(Restrictions.Eq("Vytvoril", vytvoril))
+                .SetProjection(Projections.RowCount()).UniqueResult<int>();
+
+            return session.CreateCriteria<Uzivatel>()
+                .Add(Restrictions.Eq("Vytvoril", vytvoril))
+                .SetFirstResult((page - 1) * count).SetMaxResults(count)
+                .List<Uzivatel>();
+        }
+
+        public IList<Uzivatel> GetUsersForGroupPaged(Skupina skupina, int count, int page, out int totalItems)
+        {
+            totalItems = session.CreateCriteria<Uzivatel>()
+                .Add(Restrictions.Eq("Skupina", skupina))
+                .SetProjection(Projections.RowCount()).UniqueResult<int>();
+
+            return session.CreateCriteria<Uzivatel>()
+                .Add(Restrictions.Eq("Skupina", skupina))
+                .SetFirstResult((page - 1) * count).SetMaxResults(count)
+                .List<Uzivatel>();
+        }
+
         public bool DoesUsernameExists(string username)
         {
             IList<Uzivatel> uzivatele = new UzivatelDao().GetAll();
