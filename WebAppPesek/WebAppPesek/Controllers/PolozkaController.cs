@@ -19,10 +19,6 @@ namespace WebAppPesek.Controllers
 
         public ActionResult PridatPolozku(int rozpocetId)
         {
-            /*RozpocetDao rozpocetDao = new RozpocetDao();
-            Rozpocet rozpocet = rozpocetDao.GetById(rozpocetId);
-            PolozkaRozpoctu polozka = new PolozkaRozpoctu {Rozpocet = rozpocet};
-            */
             ViewBag.Rozpocet = rozpocetId;
             return View();
         }
@@ -47,7 +43,8 @@ namespace WebAppPesek.Controllers
                 }
                 else
                 {
-                    Error("Položka je mimo velikost rozpočtu!!");
+                    rozpocetDao.CloseSession();
+                    polozkaRozpoctuDao.Create(polozka);
                 }
                
             }

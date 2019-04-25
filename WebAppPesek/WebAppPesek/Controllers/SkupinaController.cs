@@ -11,13 +11,20 @@ namespace WebAppPesek.Controllers
     [Authorize(Roles = "admin")]
     public class SkupinaController : BaseController
     {
-        public ActionResult Index()
+        public ActionResult Index(int? strana)
         {
             UzivatelDao uzivatelDao = new UzivatelDao();
             Uzivatel uzivatel = uzivatelDao.GetByLogin(User.Identity.Name);
             SkupinaDao skupinaDao = new SkupinaDao();
-            //IList<Skupina> skupiny = skupinaDao.getMyGroups(uzivatel);
-            IList<Skupina> skupiny = skupinaDao.getMyGroups(uzivatel);
+
+            int page = strana.HasValue ? strana.Value : 1;
+            int totalItems;
+
+            IList<Skupina> skupiny = skupinaDao.GetMyGroupsPaged(LoggedUser, ItemsOnPage, page, out totalItems);
+
+            ViewBag.Pages = (int)Math.Ceiling((double)totalItems / (double)ItemsOnPage);
+            ViewBag.CurrentPage = page;
+
             ViewBag.ListJePrazdny = false;
 
             if (skupiny.Count == 0)
@@ -30,12 +37,25 @@ namespace WebAppPesek.Controllers
             return View();
         }
 
-        public ActionResult Detail(int id)
+        public ActionResult Detail(int id, int? strana)
         {
             SkupinaDao skupinaDao = new SkupinaDao();
             Skupina skupina = skupinaDao.GetById(id);
-            ViewBag.Uzivatele = skupina.Uzivatele;
-            return View();
+            skupinaDao.CloseSession();
+
+            int page = strana.HasValue ? strana.Value : 1;
+            int totalItems;
+
+            UzivatelDao uzivatelDao = new UzivatelDao();
+
+            IList<Uzivatel> uzivatele = uzivatelDao.GetUsersForGroupPaged(skupina, ItemsOnPage, page, out totalItems);
+            uzivatelDao.CloseSession();
+
+            ViewBag.Pages = (int)Math.Ceiling((double)totalItems / (double)ItemsOnPage);
+            ViewBag.CurrentPage = page;
+            ViewBag.SkupinaId = skupina.Id;
+
+            return View(uzivatele);
         }
 
         public ActionResult PridaniSkupiny(Skupina skupina)

@@ -12,10 +12,19 @@ namespace WebAppPesek.Controllers
     public class RozpocetController : BaseController
     {
         // GET: Rozpocet
-        public ActionResult Index()
+        public ActionResult Index(int? strana)
         {
             RozpocetDao rozpocetDao = new RozpocetDao();
-            IList<Rozpocet> rozpocty = rozpocetDao.MeRozpocty(LoggedUser);
+
+            int page = strana != null && strana.HasValue ? strana.Value : 1;
+            int totalItems;
+
+            IList<Rozpocet> rozpocty = rozpocetDao.MeRozpoctyPaged(LoggedUser, ItemsOnPage, page, out totalItems);
+
+            ViewBag.Pages = (int)Math.Ceiling((double)totalItems / (double)ItemsOnPage);
+            ViewBag.CurrentPage = page;
+
+
             string[] pole = new string[rozpocty.Count];
             for (int i = 0; i < rozpocty.Count; i++)
             {
@@ -61,13 +70,31 @@ namespace WebAppPesek.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Detail(int id)
+        public ActionResult Detail(int id, int? strana)
         {
             RozpocetDao rozpocetDao = new RozpocetDao();
             Rozpocet rozpocet = rozpocetDao.GetById(id);
-            IList<PolozkaRozpoctu> polozky = rozpocet.Polozky;
+
             ViewBag.Zaplnenost = RozpocetHelper.VypoctiPercentRozpoctu(rozpocet);
+
+            if (ViewBag.Zaplnenost > 100)
+            {
+                Error("Přesáhli jste stanovený rozpočet!");
+            }
+
+            int page = strana != null && strana.HasValue ? strana.Value : 1;
+            int totalItems;
+
+            PolozkaRozpoctuDao polozkaRozpoctuDao = new PolozkaRozpoctuDao();
+
+            IList<PolozkaRozpoctu> polozky =
+                polozkaRozpoctuDao.GetPolozkyForRozpocetPaged(rozpocet, ItemsOnPage, page, out totalItems);
+
+            ViewBag.Pages = (int)Math.Ceiling((double)totalItems / (double)ItemsOnPage);
+            ViewBag.CurrentPage = page;
+
             ViewBag.Polozky = polozky;
+            ViewBag.rozpocetId = rozpocet.Id;
             ViewBag.Celkem = RozpocetHelper.SpocitejRozpocet(rozpocet);
             return View(rozpocet);
         }
@@ -84,7 +111,6 @@ namespace WebAppPesek.Controllers
         {
             if (RozpocetHelper.ZvalidujCas(rozpocet.PlatnyOd, rozpocet.PlatnyDo))
             {
-
                 RozpocetDao rozpocetDao = new RozpocetDao();
                 Rozpocet staryRozpocet = rozpocetDao.GetById(rozpocet.Id);
 

@@ -13,13 +13,20 @@ namespace WebAppPesek.Controllers
     public class UzivatelController : BaseController
     {
         // GET: Uzivatel
-        public ActionResult Index()
+        public ActionResult Index(int? strana)
         {
             UzivatelDao uzivatelDao = new UzivatelDao();
             Uzivatel uzivatel = uzivatelDao.GetByLogin(User.Identity.Name);
-            IList<Uzivatel> uzivatele = uzivatelDao.GetUsersForAdmin(uzivatel);
-            ViewBag.Uzivatele = uzivatele;
-            return View();
+
+            int page = strana.HasValue ? strana.Value : 1;
+            int totalItems;
+
+            IList<Uzivatel> uzivatele = uzivatelDao.GetUsersForAdminPaged(LoggedUser, ItemsOnPage, page, out totalItems);
+
+            ViewBag.Pages = (int)Math.Ceiling((double)totalItems / (double)ItemsOnPage);
+            ViewBag.CurrentPage = page;
+
+            return View(uzivatele);
         }
 
         public ActionResult PridatUzivatele()
@@ -27,7 +34,7 @@ namespace WebAppPesek.Controllers
             SkupinaDao skupinaDao = new SkupinaDao();
             UzivatelDao uzivatelDao = new UzivatelDao();
             Uzivatel uzivatel = uzivatelDao.GetByLogin(User.Identity.Name);
-            IList<Skupina> skupiny = skupinaDao.getMyGroups(uzivatel);
+            IList<Skupina> skupiny = skupinaDao.GetMyGroups(uzivatel);
             ViewBag.Skupiny = skupiny;
 
             UzivatelskaRoleDao uzivatelskaRoleDao = new UzivatelskaRoleDao();
@@ -84,7 +91,7 @@ namespace WebAppPesek.Controllers
             Uzivatel uzivatel = uzivatelDao.GetById(id);
 
             SkupinaDao skupinaDao = new SkupinaDao();
-            IList<Skupina> skupiny = skupinaDao.getMyGroups(LoggedUser);
+            IList<Skupina> skupiny = skupinaDao.GetMyGroups(LoggedUser);
             ViewBag.Skupiny = skupiny;
             return View(uzivatel);
         }

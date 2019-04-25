@@ -26,6 +26,11 @@ namespace WebAppPesek.Controllers
             set => _loggedUser = value;
         }
 
+        protected int ItemsOnPage
+        {
+            get => 5;
+        }
+
         public void Success(string text)
         {
             TempData["message-success"] = text;

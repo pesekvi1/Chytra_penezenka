@@ -26,6 +26,17 @@ namespace WebAppPesek.Controllers
             return View(LoggedUser);
         }
 
+        public ActionResult Strankovani(int pages, int currentPage, object otherParams)
+        {
+            ViewBag.Pages = pages;
+            ViewBag.CurrentPage = currentPage;
+            if (otherParams != null)
+            {
+                ViewBag.OtherParams = otherParams;
+            }
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
