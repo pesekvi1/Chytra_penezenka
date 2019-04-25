@@ -97,3 +97,13 @@ input:focus {
 .progress {
     margin-bottom: 15px;
 }
+
+.page-item.active .page-link {
+    background-color: #343a40 !important;
+    color: white!important;
+    border-color: #343a40;
+}
+
+.page-link {
+    color: #343a40!important;
+}
