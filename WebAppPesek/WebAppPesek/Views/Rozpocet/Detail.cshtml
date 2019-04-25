@@ -16,13 +16,13 @@
 @if (ViewBag.Polozky.Count == 0)
 {
     <p>
-        Rozpocet nema zadne polozky
+        Rozpočet nemá žádné položky
     </p>
 }
 else
 {
     <div class="progress" style="height: 20px;">
-        <div class="progress-bar" role="progressbar" style="width: @ViewBag.Zaplnenost%;" aria-valuenow="@ViewBag.Zaplnenost" aria-valuemin="0" aria-valuemax="100">@ViewBag.Zaplnenost%</div>
+        <div class="progress-bar @(ViewBag.Zaplnenost > 100 ? "bg-danger" : "") >" role="progressbar" style="width: @ViewBag.Zaplnenost%;" aria-valuenow="@ViewBag.Zaplnenost" aria-valuemin="0" aria-valuemax="100">@ViewBag.Zaplnenost%</div>
     </div>
 
     <div class="table-responsive">
@@ -50,8 +50,48 @@ else
             </tbody>
         </table>
     </div>
-    <div>
-        <span>Celkem použito <strong>@ViewBag.Celkem Kč</strong></span>
-    </div>
+    
 }
+
+@if (ViewBag.Pages != null && ViewBag.Polozky.Count != 0)
+{
+    <ul class="pagination">
+
+        @for (int i = 1; i <= ViewBag.Pages; i++)
+        {
+            if (i == 1)
+            {
+                <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Detail", "Rozpocet", new {strana = ViewBag.CurrentPage - 1, id = ViewBag.rozpocetId})">Předchozí</a>
+                </li>
+            }
+
+            <li class="page-item @(ViewBag.CurrentPage == i ? "active" : "")">
+                <a class="page-link" href="@Url.Action("Detail", "Rozpocet", new {strana = i, id = ViewBag.rozpocetId})">@i</a>
+            </li>
+
+            if (i == ViewBag.Pages)
+            {
+                <li class="page-item @(ViewBag.CurrentPage == ViewBag.Pages ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Detail", "Rozpocet", new {strana = ViewBag.CurrentPage + 1, id = ViewBag.rozpocetId})">Další</a>
+                </li>
+            }
+        }
+
+
+    </ul>
+}
+
+<div>
+    <span>Celkem k dispozici: <strong>@Model.Velikost Kč</strong></span><br/>
+    <span>Celkem použito: <strong>@ViewBag.Celkem Kč</strong></span><br/>
+    @if (Model.Velikost > ViewBag.Celkem)
+    {
+        <span>Zbývá: <strong class="text-success">@(Model.Velikost - ViewBag.Celkem) Kč</strong></span>
+    }
+    else
+    {
+        <span>Přesaženo: <strong class="text-danger">@(ViewBag.Celkem - Model.Velikost) Kč</strong></span>
+    }
+</div>
 

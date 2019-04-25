@@ -1,4 +1,5 @@
 ﻿@using DataAccess.Model
+@model IList<Uzivatel>
 
 @{
     ViewBag.Title = "Index";
@@ -7,7 +8,7 @@
 <h2 class="mt-4">Výpis uživatelů</h2>
 
 <a class="icon-link" href="@Url.Action("PridatUzivatele", "Uzivatel")">
-<span class="fas fa-user-plus fa-2x"></span>
+    <span class="fas fa-user-plus fa-2x"></span>
 </a>
 <p></p>
 <div class="table-responsive">
@@ -17,26 +18,30 @@
                 <th>Jméno</th>
                 <th>Příjmení</th>
                 <th>Skupina</th>
+                <th>Uživatelské jméno</th>
                 <th>Role</th>
                 <th>Akce</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (Uzivatel u in ViewBag.Uzivatele)
+            @foreach (Uzivatel u in Model)
             {
                 <tr>
                     <td>@u.Jmeno</td>
                     <td>@u.Prijmeni</td>
-                    <td>@if (u.Skupina != null)
+                    <td>
+                        @if (u.Skupina != null)
                         {
                             @u.Skupina.Nazev
                         }
                         else
                         {
                             <span class="text-danger">žádná</span>
-                        }</td>
+                        }
+                    </td>
+                    <td>@u.Login</td>
                     <td>@u.Role.Popis</td>
-                    <td class="text-justify">
+                    <td class="text-center">
                         <a class="icon-link" href="@Url.Action("Editace", "Uzivatel", new {id = u.Id})">
                             <span class="fas fa-lg fa-user-edit icon-orange"></span>
                         </a>
@@ -49,3 +54,32 @@
         </tbody>
     </table>
 </div>
+
+@if (ViewBag.Pages != null)
+{
+    <ul class="pagination">
+
+        @for (int i = 1; i <= ViewBag.Pages; i++)
+        {
+            if (i == 1)
+            {
+                <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", "Uzivatel", new {strana = ViewBag.CurrentPage - 1})">Předchozí</a>
+                </li>
+            }
+
+            <li class="page-item @(ViewBag.CurrentPage == i ? "active" : "")">
+                <a class="page-link" href="@Url.Action("Index", "Uzivatel", new {strana = i})">@i</a>
+            </li>
+
+            if (i == ViewBag.Pages)
+            {
+                <li class="page-item @(ViewBag.CurrentPage == ViewBag.Pages ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", "Uzivatel", new {strana = ViewBag.CurrentPage + 1})">Další</a>
+                </li>
+            }
+        }
+
+
+    </ul>
+}

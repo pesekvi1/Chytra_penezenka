@@ -39,7 +39,7 @@ else
                         <td>@r.PlatnyDo.ToShortDateString()</td>
                         <td class="text-center">
                             <a class="icon-link" href="@Url.Action("Detail", "Rozpocet", new {id = r.Id})">
-                                <span class="fas fa-lg fa-info-circle"></span>
+                                <span class="fas fa-lg fa-arrow-circle-right"></span>
                             </a>
                             <a class="icon-link" href="@Url.Action("Editace", "Rozpocet", new {id = r.Id})">
                                 <span class="fas fa-lg fa-edit icon-orange"></span>
@@ -55,3 +55,6 @@ else
     </div>
 }
 
+@{
+    Html.RenderAction("Strankovani", "Home", new {pages = ViewBag.Pages, currentPage = ViewBag.CurrentPage});
+}
