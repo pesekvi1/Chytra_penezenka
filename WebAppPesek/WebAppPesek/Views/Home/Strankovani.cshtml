@@ -1,0 +1,33 @@
+﻿
+@{
+    Layout = null;
+}
+
+@if (ViewBag.Pages != null)
+{
+    <ul class="pagination">
+
+        @for (int i = 1; i <= ViewBag.Pages; i++)
+        {
+            if (i == 1)
+            {
+                <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", "Rozpocet", new {strana = ViewBag.CurrentPage - 1})">Předchozí</a>
+                </li>
+            }
+
+            <li class="page-item @(ViewBag.CurrentPage == i ? "active" : "")">
+                <a class="page-link" href="@Url.Action("Index", "Rozpocet", new {strana = i})">@i</a>
+            </li>
+
+            if (i == ViewBag.Pages)
+            {
+                <li class="page-item @(ViewBag.CurrentPage == ViewBag.Pages ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", "Rozpocet", new {strana = ViewBag.CurrentPage + 1})">Další</a>
+                </li>
+            }
+        }
+
+
+    </ul>
+}

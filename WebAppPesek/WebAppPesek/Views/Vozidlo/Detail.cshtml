@@ -1,0 +1,80 @@
+﻿@using DataAccess.Model
+@model Vozidlo
+@{
+    ViewBag.Title = "Detail";
+}
+
+<h2 class="mt-4">Detail vozidla <strong>@Model.Nazev</strong></h2>
+
+<a class="icon-link" href="@Url.Action("Index", "Vozidlo")">
+    <span class="fas fa-arrow-left fa-2x"></span>
+</a>
+<a class="icon-link" href="@Url.Action("PridatZaznam", "ServisniZaznam", new {vozidloId = Model.Id})">
+    <span class="fas fa-plus-square fa-2x"></span>
+</a>
+
+@if (ViewBag.Zaznamy.Count == 0)
+{
+    <p>
+        Vozdilo nemá žádné servisní záznamy
+    </p>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover text-center table-sm">
+            <thead>
+                <tr>
+                    <th>Servis</th>
+                    <th>Cena</th>
+                    <th>Akce</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ServisniZaznam polozka in ViewBag.Zaznamy)
+                {
+                    <tr>
+                        <td>@polozka.Ucel</td>
+                        <td>@polozka.Cena</td>
+                        <td>
+                            <a class="icon-link" href="@Url.Action("Odstranit", "ServisniZaznam", new {id = polozka.Id, vozidloId = Model.Id})" onclick="return confirm('Přejete si opravdu odebrat polozku?')">
+                                <span class="fas fa-lg fa-trash-alt icon-red"></span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <span>Celkové náklady: <strong class="text-danger">@ViewBag.Naklady</strong> Kč</span><br/>
+}
+
+@if (ViewBag.Pages != null && ViewBag.Zaznamy.Count != 0)
+{
+    <ul class="pagination">
+
+        @for (int i = 1; i <= ViewBag.Pages; i++)
+        {
+            if (i == 1)
+            {
+                <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Detail", "Vozidlo", new {strana = ViewBag.CurrentPage - 1, id = ViewBag.VozidloId})">Předchozí</a>
+                </li>
+            }
+
+            <li class="page-item @(ViewBag.CurrentPage == i ? "active" : "")">
+                <a class="page-link" href="@Url.Action("Detail", "Vozidlo", new {strana = i, id = ViewBag.VozidloId})">@i</a>
+            </li>
+
+            if (i == ViewBag.Pages)
+            {
+                <li class="page-item @(ViewBag.CurrentPage == ViewBag.Pages ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Detail", "Vozidlo", new {strana = ViewBag.CurrentPage + 1, id = ViewBag.VozidloId})">Další</a>
+                </li>
+            }
+        }
+
+
+    </ul>
+}

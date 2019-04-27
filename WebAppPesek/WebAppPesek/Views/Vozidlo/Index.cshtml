@@ -1,0 +1,85 @@
+﻿@using DataAccess.Model
+@model IList<DataAccess.Model.Vozidlo>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="mt-4">Výpis vozidel</h2>
+
+<a class="icon-link" href="@Url.Action("PridatVozidlo", "Vozidlo")">
+    <span class="fas fa-plus-square fa-2x"></span>
+</a>
+<p></p>
+
+@if (Model.Count == 0)
+{
+    <p>Dosud nemáte vytvořeno žádné vozidlo</p>
+}
+else
+{
+    <div class="table-responsive-sm">
+        <table class="table table-bordered table-hover text-center table-sm">
+            <thead>
+                <tr>
+                    <th>Název vozidla</th>
+                    <th>SPZ</th>
+                    <th>Rok výroby</th>
+                    <th>Platnost STK</th>
+                    <th>Akce</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    Vozidlo v = Model[i];
+                    <tr class="@ViewBag.Active[i]">
+                        <td>@v.Nazev</td>
+                        <td>@v.Spz</td>
+                        <td>@v.RokVyroby.Year</td>
+                        <td>@v.PlatnostSTK.ToShortDateString()</td>
+                        <td class="text-center">
+                            <a class="icon-link" href="@Url.Action("Detail", "Vozidlo", new {id = v.Id})">
+                                <span class="fas fa-lg fa-arrow-circle-right"></span>
+                            </a>
+                            <a class="icon-link" href="@Url.Action("Editace", "Vozidlo", new {id = v.Id})">
+                                <span class="fas fa-lg fa-edit icon-orange"></span>
+                            </a>
+                            <a class="icon-link" href="@Url.Action("Odstranit", "Vozidlo", new {id = v.Id})" onclick="return confirm('Přejete si opravdu odstranit vozidlo?')">
+                                <span class="fas fa-lg fa-trash-alt icon-red"></span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+@if (ViewBag.Pages != null)
+{
+<ul class="pagination">
+
+    @for (int i = 1; i <= ViewBag.Pages; i++)
+    {
+        if (i == 1)
+        {
+            <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Index", "Vozidlo", new {strana = ViewBag.CurrentPage - 1})">Předchozí</a>
+            </li>
+        }
+
+        <li class="page-item @(ViewBag.CurrentPage == i ? "active" : "")">
+            <a class="page-link" href="@Url.Action("Index", "Vozidlo", new {strana = i})">@i</a>
+        </li>
+
+        if (i == ViewBag.Pages)
+        {
+            <li class="page-item @(ViewBag.CurrentPage == ViewBag.Pages ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Index", "Vozidlo", new {strana = ViewBag.CurrentPage + 1})">Další</a>
+            </li>
+        }
+    }
+
+
+</ul>
+}

@@ -1,0 +1,37 @@
+﻿@model DataAccess.Model.Vozidlo
+@{
+    ViewBag.Title = "Přidat vozidlo";
+}
+
+<h2 class="mt-4">Přidat vozidlo</h2>
+
+@using (Html.BeginForm("Vytvorit", "Vozidlo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(x => x.Vlastnik);
+
+    <div class="form-group">
+        <label>Nazev</label>
+        @Html.TextBoxFor(a => a.Nazev, new { @class = "form-control col-sm-6" })
+        @Html.ValidationMessageFor(a => a.Nazev, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label>SPZ</label>
+        @Html.TextBoxFor(a => a.Spz, new { @class = "form-control col-sm-6" })
+        @Html.ValidationMessageFor(a => a.Spz, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label>Rok výroby</label>
+        @Html.TextBox("rok", "", "{0:yyyy}", new { @class = "form-control col-sm-6 datepicker-year", @autocomplete = "off" })
+        @Html.ValidationMessageFor(a => a.RokVyroby, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label>Platnost STK</label>
+        @Html.TextBoxFor(a => a.PlatnostSTK, new { @class = "form-control col-sm-6 datepicker-item", @autocomplete = "off" })
+        @Html.ValidationMessageFor(a => a.PlatnostSTK, "", new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-dark">Přidat vozidlo</button>
+}
