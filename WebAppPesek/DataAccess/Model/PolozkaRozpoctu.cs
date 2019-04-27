@@ -15,7 +15,10 @@ namespace DataAccess.Model
     {
         public virtual int Id { get; set; }
 
-        [RegularExpression(@"^\d+.\d{0,2}$", ErrorMessage = "Cena může obsahovat maximálně 2 desetinné čárky")]
+        //[RegularExpression(@"^\d+.\d{0,2}$", ErrorMessage = "Cena může obsahovat maximálně 2 desetinné čárky")]
+        [DataType(DataType.Currency)]
+        [Required(ErrorMessage = "Cena je vyžadována")]
+        [RegularExpression(@"\b\d[\d,]*\b", ErrorMessage = "Desetinné číslo musí obsahovat čárku, ne tečku.")]
         public virtual double Cena { get; set; }
         public virtual string Ucel { get; set; }
         public virtual Rozpocet Rozpocet { get; set; }
