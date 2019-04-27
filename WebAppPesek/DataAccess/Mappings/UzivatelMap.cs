@@ -23,6 +23,8 @@ namespace DataAccess.Mappings
             References(x => x.Role).ForeignKey("FK_uzivatel_uzivatel_role_id").Column("role_id");
             References(x => x.Skupina).ForeignKey("FK_uzivatel_skupina_id").Nullable();
             References(x => x.Vytvoril).ForeignKey("FK_uzivatel_uzivatel_id").Nullable();
+            HasMany(x => x.Rozpocty).Cascade.AllDeleteOrphan();
+            HasMany(x => x.Vozidla).Cascade.AllDeleteOrphan();
         }
     }
 }

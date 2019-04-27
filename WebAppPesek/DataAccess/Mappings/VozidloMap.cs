@@ -14,12 +14,12 @@ namespace DataAccess.Mappings
         {
             Table("vozdilo");
             Id(x => x.Id).Column("id").GeneratedBy.Native();
-            References(x => x.Znacka).Column("znacka").Not.Nullable();
-            References(x => x.Model).Column("model").Not.Nullable();
-            Map(x => x.ObsahMotoru).Column("obsah_motoru").Not.Nullable();
-            Map(x => x.PocetValcu).Column("pocet_valcu").Not.Nullable();
-            Map(x => x.Spz).Column("spz").CustomSqlType("varchar(10)").Not.Nullable();
+            Map(x => x.Nazev).Not.Nullable();
+            Map(x => x.Spz).Column("spz").CustomSqlType("varchar(15)").Not.Nullable();
             Map(x => x.RokVyroby).Column("rok_vyroby").Not.Nullable();
+            Map(x => x.PlatnostSTK).Not.Nullable();
+            References(x => x.Vlastnik).Not.Nullable();
+            HasMany(x => x.ServisniZaznamy).ForeignKeyConstraintName("FK_vozidlo_polozky_id").Cascade.AllDeleteOrphan();
         }
     }
 }

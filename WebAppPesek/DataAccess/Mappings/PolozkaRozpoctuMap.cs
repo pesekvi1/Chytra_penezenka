@@ -15,7 +15,7 @@ namespace DataAccess.Mappings
             Id(x => x.Id).GeneratedBy.Native();
             Map(x => x.Cena).Not.Nullable();
             Map(x => x.Ucel).Not.Nullable();
-            References(x => x.Rozpocet).ForeignKey("FK_polozkaRozpoctu_rozpocet_id").Nullable().Cascade.SaveUpdate();
+            References(x => x.Rozpocet).ForeignKey("FK_polozkaRozpoctu_rozpocet_id").Not.Nullable().Cascade.SaveUpdate();
         }
     }
 }
