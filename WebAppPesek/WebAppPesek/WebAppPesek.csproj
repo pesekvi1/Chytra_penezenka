@@ -130,14 +130,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Class\MyMembershipProvider.cs" />
     <Compile Include="Class\MyRoleProvider.cs" />
-    <Compile Include="Class\RozpocetHelper.cs" />
+    <Compile Include="Class\Utils.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PolozkaController.cs" />
     <Compile Include="Controllers\RozpocetController.cs" />
+    <Compile Include="Controllers\ServisniZaznamController.cs" />
     <Compile Include="Controllers\SkupinaController.cs" />
     <Compile Include="Controllers\UzivatelController.cs" />
+    <Compile Include="Controllers\VozidloController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -376,6 +378,12 @@
     <Content Include="Views\Rozpocet\Editace.cshtml" />
     <Content Include="Views\Uzivatel\ZmenaHesla.cshtml" />
     <Content Include="Views\Home\Strankovani.cshtml" />
+    <Content Include="Views\Vozidlo\Index.cshtml" />
+    <Content Include="Views\ServisniZaznam\PridatZaznam.cshtml" />
+    <Content Include="Views\Vozidlo\Detail.cshtml" />
+    <Content Include="Views\Vozidlo\PridatVozidlo.cshtml" />
+    <Content Include="Views\Vozidlo\Editace.cshtml" />
+    <Content Include="Views\Polozka\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
