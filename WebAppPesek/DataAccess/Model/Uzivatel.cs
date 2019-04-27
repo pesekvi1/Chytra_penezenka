@@ -30,5 +30,9 @@ namespace DataAccess.Model
         public virtual Skupina Skupina { get; set; }
 
         public virtual Uzivatel Vytvoril { get; set; }
+
+        public virtual IList<Rozpocet> Rozpocty { get; set; }
+
+        public virtual IList<Vozidlo> Vozidla { get; set; }
 }
 }

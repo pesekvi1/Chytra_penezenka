@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,16 +12,21 @@ namespace DataAccess.Model
     {
         public virtual int Id { get; set; }
 
-        public virtual Vyrobce Znacka { get; set; }
+        public virtual Uzivatel Vlastnik { get; set; }
 
-        public virtual ModelVozidla Model { get; set; }
+        [Required]
+        public virtual string Nazev { get; set; }
 
+        [Required]
         public virtual string Spz { get; set; }
 
+        [Required]
         public virtual DateTime RokVyroby { get; set; }
 
-        public virtual int ObsahMotoru { get; set; }
+        [Required]
+        public virtual DateTime PlatnostSTK { get; set; }
 
-        public virtual int PocetValcu { get; set; }
+        public virtual IList<ServisniZaznam> ServisniZaznamy { get; set; }
+
     }
 }
