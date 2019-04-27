@@ -6,7 +6,7 @@ using DataAccess.Model;
 
 namespace WebAppPesek.Class
 {
-    public class RozpocetHelper
+    public class Utils
     {
         public static double VypoctiPercentRozpoctu(Rozpocet rozpocet)
         {
@@ -67,6 +67,43 @@ namespace WebAppPesek.Class
             }
 
             return soucet;
+        }
+
+        public static int getNowYear()
+        {
+            return DateTime.Now.Year;
+        }
+
+        public static double SpocitejNakladyNaVozidlo(Vozidlo vozidlo)
+        {
+            double soucet = 0;
+            IList<ServisniZaznam> servisniZaznamy = vozidlo.ServisniZaznamy;
+            if (servisniZaznamy != null && servisniZaznamy.Count > 0)
+            {
+                foreach (var polozka in servisniZaznamy)
+                {
+                    soucet += (double) polozka.Cena;
+                }
+            }
+            else return 0;
+            
+            return soucet;
+        }
+
+        public static bool JeStkBlizkoKExpiraci(DateTime to, int months)
+        {
+            DateTime from = DateTime.Now;
+            if (to.Month - from.Month < months)
+            {
+                return true;
+            }
+            else if (to.Month - from.Month == months)
+            {
+                if (to.Day - from.Day < 0) return true;
+            }
+
+            return false;
+
         }
     }
 }
