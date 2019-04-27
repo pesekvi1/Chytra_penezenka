@@ -31,6 +31,11 @@ namespace WebAppPesek.Controllers
             get => 5;
         }
 
+        protected int MontsToExpire
+        {
+            get => 3;
+        }
+
         public void Success(string text)
         {
             TempData["message-success"] = text;

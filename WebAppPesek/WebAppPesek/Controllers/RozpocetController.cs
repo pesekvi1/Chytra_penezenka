@@ -28,7 +28,7 @@ namespace WebAppPesek.Controllers
             string[] pole = new string[rozpocty.Count];
             for (int i = 0; i < rozpocty.Count; i++)
             {
-                if (!RozpocetHelper.JeRozpocetAktivni(rozpocty[i]))
+                if (!Utils.JeRozpocetAktivni(rozpocty[i]))
                 {
                     pole[i] = "alert-danger";
                 }
@@ -53,7 +53,7 @@ namespace WebAppPesek.Controllers
             rozpocet.Vlastnik = LoggedUser;
             if (ModelState.IsValid)
             {
-                if (RozpocetHelper.ZvalidujCas(rozpocet.PlatnyOd, rozpocet.PlatnyDo))
+                if (Utils.ZvalidujCas(rozpocet.PlatnyOd, rozpocet.PlatnyDo))
                 {
                     RozpocetDao rozpocetDao = new RozpocetDao();
                     rozpocetDao.Create(rozpocet);
@@ -75,7 +75,7 @@ namespace WebAppPesek.Controllers
             RozpocetDao rozpocetDao = new RozpocetDao();
             Rozpocet rozpocet = rozpocetDao.GetById(id);
 
-            ViewBag.Zaplnenost = RozpocetHelper.VypoctiPercentRozpoctu(rozpocet);
+            ViewBag.Zaplnenost = Utils.VypoctiPercentRozpoctu(rozpocet);
 
             if (ViewBag.Zaplnenost > 100)
             {
@@ -95,7 +95,7 @@ namespace WebAppPesek.Controllers
 
             ViewBag.Polozky = polozky;
             ViewBag.rozpocetId = rozpocet.Id;
-            ViewBag.Celkem = RozpocetHelper.SpocitejRozpocet(rozpocet);
+            ViewBag.Celkem = Utils.SpocitejRozpocet(rozpocet);
             return View(rozpocet);
         }
 
@@ -109,12 +109,12 @@ namespace WebAppPesek.Controllers
 
         public ActionResult ZmenaRozpoctu(Rozpocet rozpocet)
         {
-            if (RozpocetHelper.ZvalidujCas(rozpocet.PlatnyOd, rozpocet.PlatnyDo))
+            if (Utils.ZvalidujCas(rozpocet.PlatnyOd, rozpocet.PlatnyDo))
             {
                 RozpocetDao rozpocetDao = new RozpocetDao();
                 Rozpocet staryRozpocet = rozpocetDao.GetById(rozpocet.Id);
 
-                if (RozpocetHelper.JeNovaVelikostDostacujici(staryRozpocet, rozpocet.Velikost ))
+                if (Utils.JeNovaVelikostDostacujici(staryRozpocet, rozpocet.Velikost ))
                 {
                     staryRozpocet.PlatnyOd = rozpocet.PlatnyOd;
                     staryRozpocet.PlatnyDo = rozpocet.PlatnyDo;

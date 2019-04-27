@@ -17,6 +17,17 @@ namespace WebAppPesek.Controllers
             return View();
         }
 
+        public ActionResult Detail (PolozkaRozpoctu polozka, int rozpocetId)
+        {
+            if (polozka != null)
+            {
+                ViewBag.RozpocetId = rozpocetId;
+                return View(polozka);
+            }
+
+            return null;
+        }
+
         public ActionResult PridatPolozku(int rozpocetId)
         {
             ViewBag.Rozpocet = rozpocetId;
@@ -30,9 +41,9 @@ namespace WebAppPesek.Controllers
             polozka.Rozpocet = rozpocet;
 
             PolozkaRozpoctuDao polozkaRozpoctuDao = new PolozkaRozpoctuDao();
-            if (RozpocetHelper.JeRozpocetAktivni(rozpocet))
+            if (Utils.JeRozpocetAktivni(rozpocet))
             {
-                if (RozpocetHelper.JeVRozpoctuVolno(rozpocet, polozka.Cena))
+                if (Utils.JeVRozpoctuVolno(rozpocet, polozka.Cena))
                 {
                     if (ModelState.IsValid)
                     {
