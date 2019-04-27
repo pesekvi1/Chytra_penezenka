@@ -130,11 +130,41 @@
             todayHighlight: true
         });
 
+        $('.datepicker-year').datepicker({
+            format: "yyyy",
+            todayBtn: "linked",
+            clearBtn: true,
+            language: "cs",
+            autoclose: true,
+            minViewMode: 2,
+            maxViewMode: 2,
+            todayHighlight: true
+        });
+
+        $('.datepicker-month').datepicker({
+            format: "mm/yyyy",
+            todayBtn: "linked",
+            clearBtn: true,
+            language: "cs",
+            autoclose: true,
+            minViewMode: 1,
+            maxViewMode: 2,
+            todayHighlight: true
+        });
+
         $(function () {
             $.validator.methods.date = function (value, element) {
-                return this.optional(element) || moment(value, "DD/MM/YYYY", true).isValid();
+                return this.optional(element) || moment(value, "DD/MM/YYYY", true).isValid() || moment(value, "MM/YYYY", true).isValid() || moment(value, "YYYY", true).isValid();
+            }
+
+            $.validator.methods.number = function (value, element) {
+                return this.optional(element) || /^-?(?:\d+|\d{1,3}(?:[\s\.,]\d{3})+)(?:[\.,]\d+)?$/.test(value);
             }
         });
+
+       
+
+        
     </script>
 
 
