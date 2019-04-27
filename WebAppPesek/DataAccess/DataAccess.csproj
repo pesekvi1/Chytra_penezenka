@@ -180,7 +180,6 @@
     <Compile Include="Dao\UzivatelskaRoleDao.cs" />
     <Compile Include="Dao\VozidloDao.cs" />
     <Compile Include="Dao\VyrobceDao.cs" />
-    <Compile Include="Helper.cs" />
     <Compile Include="Mappings\ModelVozidlaMap.cs" />
     <Compile Include="Mappings\PersonMap.cs" />
     <Compile Include="Mappings\PolozkaRozpoctuMap.cs" />
