@@ -14,10 +14,14 @@ namespace DataAccess.Dao
         public Uzivatel GetByLoginAndPassword(string login, string password)
         {
             Uzivatel uzivatel = GetByLogin(login);
-            if (Crypto.VerifyHashedPassword(uzivatel.Heslo, password))
+            if (uzivatel != null)
             {
-                return uzivatel;
+                if (Crypto.VerifyHashedPassword(uzivatel.Heslo, password))
+                {
+                    return uzivatel;
+                }
             }
+            
 
             return null;
         }
