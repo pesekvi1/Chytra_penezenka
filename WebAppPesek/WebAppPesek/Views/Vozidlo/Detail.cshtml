@@ -6,9 +6,18 @@
 
 <h2 class="mt-4">Detail vozidla <strong>@Model.Nazev</strong></h2>
 
-<a class="icon-link" href="@Url.Action("Index", "Vozidlo")">
-    <span class="fas fa-arrow-left fa-2x"></span>
-</a>
+@if (ViewBag.Admin != null && ViewBag.Admin)
+{
+    <a class="icon-link" href="@Url.Action("VozidlaProMeUzivatele", "Vozidlo")">
+        <span class="fas fa-arrow-left fa-2x"></span>
+    </a>
+}
+else
+{
+    <a class="icon-link" href="@Url.Action("Index", "Vozidlo")">
+        <span class="fas fa-arrow-left fa-2x"></span>
+    </a>
+}
 <a class="icon-link" href="@Url.Action("PridatZaznam", "ServisniZaznam", new {vozidloId = Model.Id})">
     <span class="fas fa-plus-square fa-2x"></span>
 </a>
@@ -33,21 +42,13 @@ else
             <tbody>
                 @foreach (ServisniZaznam polozka in ViewBag.Zaznamy)
                 {
-                    <tr>
-                        <td>@polozka.Ucel</td>
-                        <td>@polozka.Cena</td>
-                        <td>
-                            <a class="icon-link" href="@Url.Action("Odstranit", "ServisniZaznam", new {id = polozka.Id, vozidloId = Model.Id})" onclick="return confirm('Přejete si opravdu odebrat polozku?')">
-                                <span class="fas fa-lg fa-trash-alt icon-red"></span>
-                            </a>
-                        </td>
-                    </tr>
+                    Html.RenderAction("Detail", "ServisniZaznam", new { zaznam = polozka, vozidloId = Model.Id });
                 }
             </tbody>
         </table>
     </div>
 
-    <span>Celkové náklady: <strong class="text-danger">@ViewBag.Naklady</strong> Kč</span><br/>
+    <span>Celkové náklady: <strong class="text-danger">@(((decimal)ViewBag.Naklady).ToString("C2"))</strong></span><br />
 }
 
 @if (ViewBag.Pages != null && ViewBag.Zaznamy.Count != 0)

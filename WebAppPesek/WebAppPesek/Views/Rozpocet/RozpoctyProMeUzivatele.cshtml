@@ -1,15 +1,10 @@
 ﻿@using DataAccess.Model
 @model IList<Rozpocet>
 @{
-    ViewBag.Title = "Vypis";
+    ViewBag.Title = "Rozpocty pro me uzivatele";
 }
 
-<h2 class="mt-4">Rozpočty</h2>
-
-<a class="icon-link" href="@Url.Action("VytvoreniRozpoctu", "Rozpocet")">
-    <span class="fas fa-plus-square fa-2x"></span>
-</a>
-<p></p>
+<h2 class="mt-4">Rozpočty pro mé uživatele</h2>
 
 @if (Model.Count == 0)
 {
@@ -22,6 +17,7 @@ else
             <thead>
                 <tr>
                     <th>Název rozpočtu</th>
+                    <th>Vlastník</th>
                     <th>Velikost</th>
                     <th>Platnost od</th>
                     <th>Platnost do</th>
@@ -34,11 +30,12 @@ else
                     Rozpocet r = Model[i];
                     <tr class="@ViewBag.Active[i]">
                         <td>@r.Nazev</td>
+                        <td>@r.Vlastnik.Jmeno @r.Vlastnik.Prijmeni</td>
                         <td>@Html.DisplayFor(x => x[i].Velikost)</td>
                         <td>@r.PlatnyOd.ToShortDateString()</td>
                         <td>@r.PlatnyDo.ToShortDateString()</td>
                         <td class="text-center">
-                            <a class="icon-link" href="@Url.Action("Detail", "Rozpocet", new {id = r.Id})">
+                            <a class="icon-link" href="@Url.Action("Detail", "Rozpocet", new {id = r.Id, admin = true})">
                                 <span class="fas fa-lg fa-arrow-circle-right"></span>
                             </a>
                             <a class="icon-link" href="@Url.Action("Editace", "Rozpocet", new {id = r.Id})">
@@ -55,6 +52,31 @@ else
     </div>
 }
 
-@{
-    Html.RenderAction("Strankovani", "Home", new {pages = ViewBag.Pages, currentPage = ViewBag.CurrentPage});
+@if (ViewBag.Pages != null)
+{
+    <ul class="pagination">
+
+        @for (int i = 1; i <= ViewBag.Pages; i++)
+        {
+            if (i == 1)
+            {
+                <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("RozpoctyProMeUzivatele", "Rozpocet", new {strana = ViewBag.CurrentPage - 1})">Předchozí</a>
+                </li>
+            }
+
+            <li class="page-item @(ViewBag.CurrentPage == i ? "active" : "")">
+                <a class="page-link" href="@Url.Action("RozpoctyProMeUzivatele", "Rozpocet", new {strana = i})">@i</a>
+            </li>
+
+            if (i == ViewBag.Pages)
+            {
+                <li class="page-item @(ViewBag.CurrentPage == ViewBag.Pages ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("RozpoctyProMeUzivatele", "Rozpocet", new {strana = ViewBag.CurrentPage + 1})">Další</a>
+                </li>
+            }
+        }
+
+
+    </ul>
 }

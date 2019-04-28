@@ -7,7 +7,6 @@
 
 @using (Html.BeginForm("ZmenaRozpoctu", "Rozpocet", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    @Html.HiddenFor(x => x.Polozky)
     @Html.HiddenFor(x => x.Vlastnik)
     @Html.HiddenFor(x => x.Id)
     <div class="form-group">

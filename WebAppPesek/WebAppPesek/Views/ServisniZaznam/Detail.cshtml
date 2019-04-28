@@ -1,0 +1,14 @@
+﻿@model DataAccess.Model.ServisniZaznam
+@{
+    Layout = null;
+}
+
+<tr>
+    <td>@Model.Ucel</td>
+    <td>@Html.DisplayFor(x => x.Cena)</td>
+    <td>
+        <a class="icon-link" href="@Url.Action("Odstranit", "ServisniZaznam", new {id = Model.Id, vozidloId = ViewBag.VozidloId})" onclick="return confirm('Přejete si opravdu odebrat polozku?')">
+            <span class="fas fa-lg fa-trash-alt icon-red"></span>
+        </a>
+    </td>
+</tr>

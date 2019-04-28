@@ -122,7 +122,7 @@
 
     <script type="text/javascript">
         $('.datepicker-item').datepicker({
-            format: "dd/mm/yyyy",
+            format: "dd.mm.yyyy",
             todayBtn: "linked",
             clearBtn: true,
             language: "cs",
@@ -142,7 +142,7 @@
         });
 
         $('.datepicker-month').datepicker({
-            format: "mm/yyyy",
+            format: "mm.yyyy",
             todayBtn: "linked",
             clearBtn: true,
             language: "cs",
@@ -154,7 +154,11 @@
 
         $(function () {
             $.validator.methods.date = function (value, element) {
-                return this.optional(element) || moment(value, "DD/MM/YYYY", true).isValid() || moment(value, "MM/YYYY", true).isValid() || moment(value, "YYYY", true).isValid();
+                return this.optional(element) ||
+                    moment(value, "DD/MM/YYYY", true).isValid() || 
+                    moment(value, "DD.MM.YYYY", true).isValid() ||
+                    moment(value, "MM/YYYY", true).isValid() || 
+                    moment(value, "YYYY", true).isValid();
             }
 
             $.validator.methods.number = function (value, element) {

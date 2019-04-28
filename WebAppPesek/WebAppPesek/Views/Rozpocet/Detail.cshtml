@@ -6,9 +6,19 @@
 
 <h2 class="mt-4">Detail rozpoctu <strong>@Model.Nazev</strong></h2>
 
-<a class="icon-link" href="@Url.Action("Index", "Rozpocet")">
-    <span class="fas fa-arrow-left fa-2x"></span>
-</a>
+@if (ViewBag.Admin != null && ViewBag.Admin)
+{
+    <a class="icon-link" href="@Url.Action("RozpoctyProMeUzivatele", "Rozpocet")">
+        <span class="fas fa-arrow-left fa-2x"></span>
+    </a>
+}
+else
+{
+    <a class="icon-link" href="@Url.Action("Index", "Rozpocet")">
+        <span class="fas fa-arrow-left fa-2x"></span>
+    </a>
+}
+
 <a class="icon-link" href="@Url.Action("PridatPolozku", "Polozka", new {rozpocetId = Model.Id})">
     <span class="fas fa-plus-square fa-2x"></span>
 </a>
@@ -75,15 +85,15 @@ else
 }
 
 <div>
-    <span>Celkem k dispozici: <strong>@Model.Velikost Kč</strong></span><br/>
-    <span>Celkem použito: <strong>@ViewBag.Celkem Kč</strong></span><br/>
-    @if (Model.Velikost > ViewBag.Celkem)
+    <span>Celkem k dispozici: <strong>@Html.DisplayFor(x => x.Velikost)</strong></span><br/>
+    <span>Celkem použito: <strong>@(((decimal)ViewBag.Celkem).ToString("C2"))</strong></span><br/>
+    @if (ViewBag.Pouzito > 0)
     {
-        <span>Zbývá: <strong class="text-success">@(Model.Velikost - ViewBag.Celkem) Kč</strong></span>
+        <span>Zbývá: <strong class="text-success">@(((decimal)ViewBag.Pouzito).ToString("C2"))</strong></span>
     }
     else
     {
-        <span>Přesaženo: <strong class="text-danger">@(ViewBag.Celkem - Model.Velikost) Kč</strong></span>
+        <span>Zbývá: <strong class="text-danger">@(((decimal)ViewBag.Pouzito).ToString("C2"))</strong></span>
     }
 </div>
 

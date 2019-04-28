@@ -7,10 +7,8 @@
 
 @using (Html.BeginForm("ZmenaVozidla", "Vozidlo", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    @Html.HiddenFor(x => x.ServisniZaznamy)
     @Html.HiddenFor(x => x.Vlastnik)
     @Html.HiddenFor(x => x.Id)
-
     <div class="form-group">
         <label>Nazev</label>
         @Html.TextBoxFor(a => a.Nazev, new { @class = "form-control col-sm-6" })
