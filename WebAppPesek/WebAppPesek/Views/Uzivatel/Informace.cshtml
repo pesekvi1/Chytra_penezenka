@@ -9,6 +9,7 @@
 <div>
     <span><strong>Uživatel:</strong> @Model.Jmeno @Model.Prijmeni</span><br />
     <span><strong>Přihlašovací jméno:</strong> @Model.Login</span><br />
+    <span><strong>Role: </strong> @Model.Role.Nazev</span><b></b>
     @if (Model.Skupina != null)
     {
         <span><strong>Skupina:</strong> @Model.Skupina.Nazev</span><br />
