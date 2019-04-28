@@ -23,7 +23,9 @@ namespace DataAccess.Model
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public virtual DateTime PlatnyDo { get; set; }
 
-        [RegularExpression(@"^\d+.\d{0,2}$", ErrorMessage = "Velikost rozpoctu může obsahovat maximálně 2 desetinné čárky")]
+        [DataType(DataType.Currency)]
+        [Required(ErrorMessage = "Velikost je vyžadována")]
+        [RegularExpression(@"\b\d[\d,]*\b", ErrorMessage = "Desetinné číslo musí obsahovat čárku, ne tečku.")]
         public virtual double Velikost { get; set; }
 
         public virtual IList<PolozkaRozpoctu> Polozky { get; set; }

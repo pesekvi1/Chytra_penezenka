@@ -18,6 +18,7 @@ namespace DataAccess.Model
         public virtual string Nazev { get; set; }
 
         [Required]
+        [MaxLength(9, ErrorMessage = "Překročili jste maximální délku SPZ")]
         public virtual string Spz { get; set; }
 
         [Required]
