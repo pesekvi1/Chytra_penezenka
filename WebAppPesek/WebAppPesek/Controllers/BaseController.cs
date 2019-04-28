@@ -31,9 +31,9 @@ namespace WebAppPesek.Controllers
             get => 5;
         }
 
-        protected int MontsToExpire
+        protected int DaysToExpire
         {
-            get => 3;
+            get => 60;
         }
 
         public void Success(string text)

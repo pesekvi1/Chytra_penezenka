@@ -27,6 +27,12 @@ namespace WebAppPesek.Controllers
             VozidloDao vozidloDao = new VozidloDao();
             Vozidlo vozidlo = vozidloDao.GetById(vozidloId);
 
+            if (vozidlo.Vlastnik.Login != LoggedUser.Login)
+            {
+                Error("Nejste vlastníkem vozidla");
+                return RedirectToAction("Detail", "Vozidlo", new { id = vozidloId });
+            }
+
             zaznam.Vozidlo = vozidlo;
             if (ModelState.IsValid)
             {
@@ -37,6 +43,12 @@ namespace WebAppPesek.Controllers
             }
 
             return RedirectToAction("Detail", "Vozidlo", new {id = vozidloId});
+        }
+
+        public ActionResult Detail(ServisniZaznam zaznam, int vozidloId)
+        {
+            ViewBag.VozidloId = vozidloId;
+            return View(zaznam);
         }
 
         public ActionResult Odstranit(int id, int vozidloId)

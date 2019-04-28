@@ -24,20 +24,31 @@ namespace WebAppPesek.Controllers
             ViewBag.Pages = (int)Math.Ceiling((double)totalItems / (double)ItemsOnPage);
             ViewBag.CurrentPage = page;
 
-            string[] pole = new string[vozidla.Count];
-            for (int i = 0; i < vozidla.Count; i++)
-            {
-                if (Utils.JeStkBlizkoKExpiraci(vozidla[i].PlatnostSTK, MontsToExpire))
-                {
-                    pole[i] = "alert-danger";
-                }
-                else
-                {
-                    pole[i] = "";
-                }
-            }
-
+            string[] pole = Utils.zvalidujStk(vozidla, DaysToExpire);
             ViewBag.Active = pole;
+            return View(vozidla);
+        }
+
+        [Authorize(Roles = "admin")]
+        public ActionResult VozidlaProMeUzivatele(int? strana)
+        {
+            VozidloDao vozidloDao = new VozidloDao();
+
+            int page = strana != null && strana.HasValue ? strana.Value : 1;
+            int totalItems;
+
+            UzivatelDao uzivatelDao = new UzivatelDao();
+
+            IList<Vozidlo> vozidla = vozidloDao.GetUsersVozidlaForAdmin(LoggedUser, ItemsOnPage, page, out totalItems);
+            
+            ViewBag.Pages = (int)Math.Ceiling((double)totalItems / (double)ItemsOnPage);
+            ViewBag.CurrentPage = page;
+
+            string[] pole = Utils.zvalidujStk(vozidla, DaysToExpire);
+            ViewBag.Active = pole;
+
+            ViewBag.Admin = true;
+
             return View(vozidla);
         }
 
@@ -61,7 +72,7 @@ namespace WebAppPesek.Controllers
             return RedirectToAction("Index", "Vozidlo");
         }
 
-        public ActionResult Detail(int id, int? strana)
+        public ActionResult Detail(int id, int? strana, bool? admin)
         {
             VozidloDao vozidloDao = new VozidloDao();
             Vozidlo vozidlo = vozidloDao.GetById(id);
@@ -69,7 +80,7 @@ namespace WebAppPesek.Controllers
             int page = strana != null && strana.HasValue ? strana.Value : 1;
             int totalItems;
 
-            if (Utils.JeStkBlizkoKExpiraci(vozidlo.PlatnostSTK, MontsToExpire))
+            if (Utils.JeStkBlizkoKExpiraci(vozidlo.PlatnostSTK, DaysToExpire))
             {
                 Error("Platnost STK končí k " + vozidlo.PlatnostSTK.ToShortDateString() + ". Zařiďte si prosím obnovení platnosti.");
             }
@@ -84,6 +95,11 @@ namespace WebAppPesek.Controllers
 
             ViewBag.VozidloId = vozidlo.Id;
             ViewBag.Naklady = Utils.SpocitejNakladyNaVozidlo(vozidlo);
+
+            if (admin == true)
+            {
+                ViewBag.Admin = true;
+            }
 
             return View(vozidlo);
         }

@@ -25,18 +25,7 @@ namespace WebAppPesek.Controllers
             ViewBag.CurrentPage = page;
 
 
-            string[] pole = new string[rozpocty.Count];
-            for (int i = 0; i < rozpocty.Count; i++)
-            {
-                if (!Utils.JeRozpocetAktivni(rozpocty[i]))
-                {
-                    pole[i] = "alert-danger";
-                }
-                else
-                {
-                    pole[i] = "";
-                }
-            }
+            string[] pole = Utils.zvalidujRozpocty(rozpocty);
 
             ViewBag.Active = pole;
             return View(rozpocty);
@@ -70,7 +59,7 @@ namespace WebAppPesek.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Detail(int id, int? strana)
+        public ActionResult Detail(int id, int? strana, bool? admin)
         {
             RozpocetDao rozpocetDao = new RozpocetDao();
             Rozpocet rozpocet = rozpocetDao.GetById(id);
@@ -95,7 +84,15 @@ namespace WebAppPesek.Controllers
 
             ViewBag.Polozky = polozky;
             ViewBag.rozpocetId = rozpocet.Id;
-            ViewBag.Celkem = Utils.SpocitejRozpocet(rozpocet);
+            double celkem = Utils.SpocitejRozpocet(rozpocet);
+            ViewBag.Pouzito = rozpocet.Velikost - celkem;
+            ViewBag.Celkem = celkem;
+
+            if (admin == true)
+            {
+                ViewBag.Admin = true;
+            }
+
             return View(rozpocet);
         }
 
@@ -121,8 +118,12 @@ namespace WebAppPesek.Controllers
                     staryRozpocet.Nazev = rozpocet.Nazev;
                     staryRozpocet.Velikost = rozpocet.Velikost;
 
-                    rozpocetDao.Update(staryRozpocet);
-                    Success("Rozpočet " + rozpocet.Nazev + " úspěšně upraven");
+                    if (ModelState.IsValid)
+                    {
+                        rozpocetDao.Update(staryRozpocet);
+                        Success("Rozpočet " + rozpocet.Nazev + " úspěšně upraven");
+                    }
+
                 }
                 else
                 {
@@ -137,6 +138,28 @@ namespace WebAppPesek.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        [Authorize(Roles = "admin")]
+        public ActionResult RozpoctyProMeUzivatele(int? strana)
+        {
+            RozpocetDao rozpocetDao = new RozpocetDao();
+
+            int page = strana != null && strana.HasValue ? strana.Value : 1;
+            int totalItems;
+         
+            IList<Rozpocet> rozpocty =
+                rozpocetDao.GetUserRozpoctyForAdminPaged(LoggedUser, ItemsOnPage, page, out totalItems);
+           
+            ViewBag.Pages = (int)Math.Ceiling((double)totalItems / (double)ItemsOnPage);
+            ViewBag.CurrentPage = page;
+
+            string[] pole = Utils.zvalidujRozpocty(rozpocty);
+            ViewBag.Active = pole;
+
+            ViewBag.Admin = true;
+
+            return View(rozpocty);
         }
 
         public ActionResult Odstranit(int id)

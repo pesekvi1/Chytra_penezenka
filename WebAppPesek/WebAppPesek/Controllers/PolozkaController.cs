@@ -38,6 +38,13 @@ namespace WebAppPesek.Controllers
         {
             RozpocetDao rozpocetDao = new RozpocetDao();
             Rozpocet rozpocet = rozpocetDao.GetById(rozpocetId);
+
+            if (rozpocet.Vlastnik.Login != LoggedUser.Login)
+            {
+                Error("Nejste vlastníkem rozpočtu");
+                return RedirectToAction("Detail", "Rozpocet", new { id = rozpocet.Id});
+            }
+
             polozka.Rozpocet = rozpocet;
 
             PolozkaRozpoctuDao polozkaRozpoctuDao = new PolozkaRozpoctuDao();
@@ -65,7 +72,7 @@ namespace WebAppPesek.Controllers
             }
 
 
-            return RedirectToAction("Detail", "Rozpocet", new { id = polozka.Rozpocet.Id });
+            return RedirectToAction("Detail", "Rozpocet", new { id = rozpocet.Id });
         }
 
         public ActionResult Odstranit(int id, int rozpocetId)
