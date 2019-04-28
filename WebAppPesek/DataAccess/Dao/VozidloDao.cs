@@ -21,6 +21,19 @@ namespace DataAccess.Dao
                 .SetFirstResult((page - 1) * count).SetMaxResults(count)
                 .List<Vozidlo>();
         }
-        
+
+        public IList<Vozidlo> GetUsersVozidlaForAdmin(Uzivatel vlastnik, int count, int page, out int totalItems)
+        {
+            totalItems = session.CreateCriteria<Vozidlo>()
+                .CreateCriteria("Vlastnik")
+                .Add(Restrictions.Eq("Vytvoril", vlastnik))
+                .SetProjection(Projections.RowCount()).UniqueResult<int>();
+
+            return session.CreateCriteria<Vozidlo>()
+                .CreateCriteria("Vlastnik")
+                .Add(Restrictions.Eq("Vytvoril", vlastnik))
+                .SetFirstResult((page - 1) * count).SetMaxResults(count)
+                .List<Vozidlo>();
+        }
     }
 }

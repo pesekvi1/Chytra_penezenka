@@ -21,5 +21,19 @@ namespace DataAccess.Dao
                 .SetFirstResult((page - 1) * count).SetMaxResults(count)
                 .List<Rozpocet>();
         }
+
+        public IList<Rozpocet> GetUserRozpoctyForAdminPaged(Uzivatel uzivatel, int count, int page, out int totalItems)
+        {
+            totalItems = session.CreateCriteria<Rozpocet>()
+                .CreateCriteria("Vlastnik")
+                .Add(Restrictions.Eq("Vytvoril", uzivatel))
+                .SetProjection(Projections.RowCount()).UniqueResult<int>();
+
+            return session.CreateCriteria<Rozpocet>()
+                .CreateCriteria("Vlastnik")
+                .Add(Restrictions.Eq("Vytvoril", uzivatel))
+                .SetFirstResult((page - 1) * count).SetMaxResults(count)
+                .List<Rozpocet>();
+        }
     }
 }
