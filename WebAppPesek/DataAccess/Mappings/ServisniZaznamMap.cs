@@ -12,10 +12,10 @@ namespace DataAccess.Mappings
     {
         public ServisniZaznamMap()
         {
-            Id(x => x.Id);
+            Id(x => x.Id).GeneratedBy.Native();
             Map(x => x.Ucel).Not.Nullable();
             Map(x => x.Cena).Not.Nullable();
-            References(x => x.Vozidlo).ForeignKey("FK_servisniZaznam_vozidlo_id").Not.Nullable().Cascade.SaveUpdate();
+            References(x => x.Vozidlo).ForeignKey("FK_vozidlo_polozky_id").Nullable().Cascade.SaveUpdate();
         }
     }
 }

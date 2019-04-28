@@ -19,7 +19,7 @@ namespace DataAccess.Mappings
             Map(x => x.RokVyroby).Column("rok_vyroby").Not.Nullable();
             Map(x => x.PlatnostSTK).Not.Nullable();
             References(x => x.Vlastnik).Not.Nullable();
-            HasMany(x => x.ServisniZaznamy).ForeignKeyConstraintName("FK_vozidlo_polozky_id").Cascade.AllDeleteOrphan();
+            HasMany(x => x.ServisniZaznamy).ForeignKeyConstraintName("FK_vozidlo_polozky_id").Cascade.AllDeleteOrphan().Inverse();
         }
     }
 }
