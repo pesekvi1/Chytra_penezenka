@@ -117,6 +117,39 @@ namespace WebAppPesek.Controllers
             return RedirectToAction("Index", "Uzivatel");
         }
 
+        public ActionResult Informace()
+        {
+            UzivatelDao uzivatelDao = new UzivatelDao();
+            Uzivatel uzivatel = uzivatelDao.GetById(LoggedUser.Id);
+            
+            return View(uzivatel);
+        }
+
+        public ActionResult UpravitInformace()
+        {
+            UzivatelDao uzivatelDao = new UzivatelDao();
+            Uzivatel uzivatel = uzivatelDao.GetById(LoggedUser.Id);
+
+            return View(uzivatel);
+        }
+
+        public ActionResult UlozitZmenu(Uzivatel uzivatel)
+        {
+            UzivatelDao uzivatelDao = new UzivatelDao();
+            Uzivatel staryUzivatel = uzivatelDao.GetById(uzivatel.Id);
+
+            staryUzivatel.Jmeno = uzivatel.Jmeno;
+            staryUzivatel.Prijmeni = uzivatel.Prijmeni;
+
+            if (ModelState.IsValid)
+            {
+                uzivatelDao.Update(staryUzivatel);
+                Success("Informace úspěšně změněny");
+            }
+
+            return RedirectToAction("Informace");
+        }
+
         public ActionResult ZmenaHesla()
         {
             return View();
