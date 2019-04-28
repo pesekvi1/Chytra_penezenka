@@ -90,20 +90,54 @@ namespace WebAppPesek.Class
             return soucet;
         }
 
-        public static bool JeStkBlizkoKExpiraci(DateTime to, int months)
+        public static bool JeStkBlizkoKExpiraci(DateTime to, int days)
         {
             DateTime from = DateTime.Now;
-            if (to.Month - from.Month < months)
+            
+            TimeSpan elapsed = new TimeSpan(to.Ticks - from.Ticks);
+
+            if (elapsed.Days < days)
             {
                 return true;
             }
-            else if (to.Month - from.Month == months)
-            {
-                if (to.Day - from.Day < 0) return true;
-            }
 
             return false;
+        }
 
+        public static string[] zvalidujRozpocty(IList<Rozpocet> rozpocty)
+        {
+            string[] pole = new string[rozpocty.Count];
+            for (int i = 0; i < rozpocty.Count; i++)
+            {
+                if (!Utils.JeRozpocetAktivni(rozpocty[i]))
+                {
+                    pole[i] = "alert-danger";
+                }
+                else
+                {
+                    pole[i] = "";
+                }
+            }
+
+            return pole;
+        }
+
+        public static string[] zvalidujStk(IList<Vozidlo> vozidla, int daysToExpire)
+        {
+            string[] pole = new string[vozidla.Count];
+            for (int i = 0; i < vozidla.Count; i++)
+            {
+                if (Utils.JeStkBlizkoKExpiraci(vozidla[i].PlatnostSTK, daysToExpire))
+                {
+                    pole[i] = "alert-danger";
+                }
+                else
+                {
+                    pole[i] = "";
+                }
+            }
+
+            return pole;
         }
     }
 }
