@@ -384,6 +384,9 @@
     <Content Include="Views\Vozidlo\PridatVozidlo.cshtml" />
     <Content Include="Views\Vozidlo\Editace.cshtml" />
     <Content Include="Views\Polozka\Detail.cshtml" />
+    <Content Include="Views\ServisniZaznam\Detail.cshtml" />
+    <Content Include="Views\Rozpocet\RozpoctyProMeUzivatele.cshtml" />
+    <Content Include="Views\Vozidlo\VozidlaProMeUzivatele.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
