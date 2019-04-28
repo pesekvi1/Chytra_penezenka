@@ -26,7 +26,7 @@ namespace WebAppPesek.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            TempData["user-error-message"] = "Login nebo heslo neni spravne";
+            UserError("Zadali jste špatné přihlašovací údaje");
             return RedirectToAction("Index", "Login");
         }
 
@@ -63,6 +63,7 @@ namespace WebAppPesek.Controllers
                     try
                     {
                         uzivatelDao.CreateWithHashedPassword(uzivatel);
+                        Success("Uživatel byl úspěšně vytvořen");
                     }
                     catch (Exception e)
                     {

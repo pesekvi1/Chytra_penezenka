@@ -125,16 +125,14 @@ namespace WebAppPesek.Controllers
         public ActionResult ZmenitHeslo(string stareHeslo, string noveHeslo, string noveHesloZnovu)
         {
             UzivatelDao uzivatelDao = new UzivatelDao();
+            Uzivatel staryUzivatel = uzivatelDao.GetById(LoggedUser.Id);
             if (Crypto.VerifyHashedPassword(LoggedUser.Heslo, stareHeslo))
             {
                 if (noveHeslo == noveHesloZnovu)
                 {
-                    if (ModelState.IsValid)
-                    {
-                        LoggedUser.Heslo = Crypto.HashPassword(noveHeslo);
-                        uzivatelDao.Update(LoggedUser);
-                        Success("Heslo úspěšně změněno");
-                    }
+                    staryUzivatel.Heslo = Crypto.HashPassword(noveHeslo);
+                    uzivatelDao.Update(staryUzivatel);
+                    Success("Heslo úspěšně změněno");
                 }
                 else
                 {

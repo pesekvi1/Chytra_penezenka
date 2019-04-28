@@ -18,9 +18,10 @@ namespace WebAppPesek.Controllers
             {
                 if (_loggedUser == null)
                 {
-                    UzivatelDao uzivatelDao = new UzivatelDao();
-                    _loggedUser = uzivatelDao.GetByLogin(User.Identity.Name);
+                    UzivatelDao userDao = new UzivatelDao();
+                    _loggedUser = userDao.GetByLogin(User.Identity.Name);
                 }
+
                 return _loggedUser;
             }
             set => _loggedUser = value;
@@ -44,6 +45,11 @@ namespace WebAppPesek.Controllers
         public void Error(string text)
         {
             TempData["error-message"] = text;
+        }
+
+        public void UserError(string text)
+        {
+            TempData["user-error-message"] = text;
         }
     }
 }

@@ -23,7 +23,11 @@ namespace WebAppPesek.Controllers
 
         public ActionResult Menu()
         {
-            return View(LoggedUser);
+            UzivatelskaRoleDao uzivatelskaRoleDao = new UzivatelskaRoleDao();
+            UzivatelskaRole role = uzivatelskaRoleDao.GetById(LoggedUser.Role.Id);
+            ViewBag.Role = role.Nazev;
+            uzivatelskaRoleDao.CloseSession();
+            return View();
         }
 
         public ActionResult Strankovani(int pages, int currentPage, object otherParams)
