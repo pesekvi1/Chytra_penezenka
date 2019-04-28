@@ -1,0 +1,28 @@
+﻿@using DataAccess.Model
+@model Uzivatel
+@{
+    ViewBag.Title = "UpravitInformace";
+}
+
+<h2 class="mt-4">Upravit Informace</h2>
+
+@using (Html.BeginForm("UlozitZmenu", "Uzivatel", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.Id)
+    @Html.HiddenFor(x => x.Heslo)
+    @Html.HiddenFor(x => x.Login)
+
+    <div class="form-group">
+        <label>Jmeno</label>
+        @Html.TextBoxFor(a => a.Jmeno, new { @class = "form-control col-sm-6" })
+        @Html.ValidationMessageFor(a => a.Jmeno, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label>Prijmeni</label>
+        @Html.TextBoxFor(a => a.Prijmeni, new { @class = "form-control col-sm-6" })
+        @Html.ValidationMessageFor(a => a.Prijmeni, "", new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Odeslat</button>
+}

@@ -1,0 +1,24 @@
+﻿@using DataAccess.Model
+@model Uzivatel
+@{
+    ViewBag.Title = "Informace";
+}
+
+<h2 class="mt-4">Informace</h2>
+
+<div>
+    <span><strong>Uživatel:</strong> @Model.Jmeno @Model.Prijmeni</span><br />
+    <span><strong>Přihlašovací jméno:</strong> @Model.Login</span><br />
+    @if (Model.Skupina != null)
+    {
+        <span><strong>Skupina:</strong> @Model.Skupina.Nazev</span><br />
+    }
+
+    @if (Model.Vytvoril != null)
+    {
+        <span><strong>Vytořil:</strong> @Model.Vytvoril.Jmeno @Model.Vytvoril.Prijmeni</span>
+    }
+
+</div>
+
+@Html.ActionLink("Upravit informace", "UpravitInformace", "Uzivatel")
