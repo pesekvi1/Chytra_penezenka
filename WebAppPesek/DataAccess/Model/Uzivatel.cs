@@ -13,16 +13,16 @@ namespace DataAccess.Model
     {
         public virtual int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Zadejte jméno")]
         public virtual string Jmeno { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Zadejte příjmení")]
         public virtual string Prijmeni { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vyplňte přihlašovací jméno")]
         public virtual string Login { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Zadejte heslo")]
         public virtual string Heslo { get; set; }
 
         public virtual UzivatelskaRole Role { get; set; }

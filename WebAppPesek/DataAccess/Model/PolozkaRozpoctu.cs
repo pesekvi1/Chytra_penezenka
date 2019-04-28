@@ -20,6 +20,7 @@ namespace DataAccess.Model
         [Required(ErrorMessage = "Cena je vyžadována")]
         [RegularExpression(@"\b\d[\d,]*\b", ErrorMessage = "Desetinné číslo musí obsahovat čárku, ne tečku.")]
         public virtual double Cena { get; set; }
+        [Required(ErrorMessage = "Pole je vyžadováno")]
         public virtual string Ucel { get; set; }
         public virtual Rozpocet Rozpocet { get; set; }
     }

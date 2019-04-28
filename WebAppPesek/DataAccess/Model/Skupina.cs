@@ -12,7 +12,7 @@ namespace DataAccess.Model
     {
         public virtual int Id { get; set; }
         public virtual Uzivatel Zakladatel { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Zadejte název skupiny")]
         public virtual string Nazev { get; set; }
         public virtual IList<Uzivatel> Uzivatele { get; set; }
 

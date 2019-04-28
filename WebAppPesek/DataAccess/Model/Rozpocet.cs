@@ -18,9 +18,11 @@ namespace DataAccess.Model
         public virtual Uzivatel Vlastnik { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "Datum je vyžadováno")]
         public virtual DateTime PlatnyOd { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "Datum je vyžadováno")]
         public virtual DateTime PlatnyDo { get; set; }
 
         [DataType(DataType.Currency)]

@@ -21,10 +21,10 @@ namespace DataAccess.Model
         [MaxLength(9, ErrorMessage = "Překročili jste maximální délku SPZ")]
         public virtual string Spz { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Rok výroby vyžadován")]
         public virtual DateTime RokVyroby { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Platnost státní technické kontroly je vyžadována")]
         public virtual DateTime PlatnostSTK { get; set; }
 
         public virtual IList<ServisniZaznam> ServisniZaznamy { get; set; }
