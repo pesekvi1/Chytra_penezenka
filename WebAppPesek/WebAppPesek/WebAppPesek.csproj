@@ -387,6 +387,8 @@
     <Content Include="Views\ServisniZaznam\Detail.cshtml" />
     <Content Include="Views\Rozpocet\RozpoctyProMeUzivatele.cshtml" />
     <Content Include="Views\Vozidlo\VozidlaProMeUzivatele.cshtml" />
+    <Content Include="Views\Uzivatel\Informace.cshtml" />
+    <Content Include="Views\Uzivatel\UpravitInformace.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
