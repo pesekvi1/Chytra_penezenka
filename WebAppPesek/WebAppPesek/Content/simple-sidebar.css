@@ -107,3 +107,15 @@ input:focus {
 .page-link {
     color: #343a40!important;
 }
+
+input.form-control.input-validation-error,
+input.form-control.input-validation-error:focus {
+    box-shadow: 0 0 0 0.2rem rgba(204, 0, 0, .30);
+    border: none;
+}
+
+input.form-control.valid,
+input.form-control.valid:focus {
+    box-shadow: 0 0 0 0.2rem rgba(16, 119, 4, .45);
+    border: none;
+}

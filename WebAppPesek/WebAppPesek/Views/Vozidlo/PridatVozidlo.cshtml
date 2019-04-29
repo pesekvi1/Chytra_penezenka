@@ -23,7 +23,7 @@
 
     <div class="form-group">
         <label>Rok výroby</label>
-        @Html.TextBox("rok", "", "{0:yyyy}", new { @class = "form-control col-sm-6 datepicker-year", @autocomplete = "off" })
+        @Html.TextBox("rok", "", "{0:yyyy}", new { @class = "form-control col-sm-6 datepicker-year", @autocomplete = "off", @required = true })
         @Html.ValidationMessageFor(a => a.RokVyroby, "", new { @class = "text-danger" })
     </div>
 

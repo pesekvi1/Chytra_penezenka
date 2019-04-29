@@ -47,7 +47,3 @@ body {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
-input:focus {
-    border-color: black!important;
-    box-shadow: 0 0 5px black!important;
-}
