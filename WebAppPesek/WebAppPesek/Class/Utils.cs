@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using DataAccess.Model;
 
 namespace WebAppPesek.Class
@@ -138,6 +139,13 @@ namespace WebAppPesek.Class
             }
 
             return pole;
+        }
+
+        public static DateTime addValidationTillMidnight(DateTime date)
+        {
+            DateTime datum = new DateTime(date.Year, date.Month, date.Day, 23,59,59);
+
+            return datum;
         }
     }
 }
