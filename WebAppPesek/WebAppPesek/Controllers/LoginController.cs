@@ -47,8 +47,9 @@ namespace WebAppPesek.Controllers
         public ActionResult SignUp(Uzivatel uzivatel)
         {
             UzivatelDao uzivatelDao = new UzivatelDao();
+            Uzivatel novyUzivatel = uzivatelDao.GetByLogin(uzivatel.Login);
 
-            if (!uzivatelDao.DoesUsernameExists(uzivatel.Login))
+            if (novyUzivatel == null)
             {
                 UzivatelskaRoleDao uzivatelskaRoleDao = new UzivatelskaRoleDao();
                 UzivatelskaRole role = uzivatelskaRoleDao.GetRoleWithName("admin");

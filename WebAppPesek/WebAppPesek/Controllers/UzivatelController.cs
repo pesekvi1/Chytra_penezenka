@@ -48,7 +48,8 @@ namespace WebAppPesek.Controllers
         public ActionResult Vytvorit(Uzivatel uzivatel, int skupinaId)
         {
             UzivatelDao uzivatelDao = new UzivatelDao();
-            if (uzivatelDao.DoesUsernameExists(uzivatel.Login))
+            Uzivatel novyUzivatel = uzivatelDao.GetByLogin(uzivatel.Login);
+            if (novyUzivatel != null)
             {
                 TempData["error-message"] = "Uživatel s tímto uživ. jménem již existuje";
                 return RedirectToAction("PridatUzivatele");

@@ -69,18 +69,5 @@ namespace DataAccess.Dao
                 .List<Uzivatel>();
         }
 
-        public bool DoesUsernameExists(string username)
-        {
-            IList<Uzivatel> uzivatele = new UzivatelDao().GetAll();
-            foreach (var uzivatel in uzivatele)
-            {
-                if (uzivatel.Login == username)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
     }
 }
