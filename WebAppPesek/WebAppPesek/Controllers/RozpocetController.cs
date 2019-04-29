@@ -40,6 +40,7 @@ namespace WebAppPesek.Controllers
         public ActionResult Pridani(Rozpocet rozpocet)
         {
             rozpocet.Vlastnik = LoggedUser;
+            rozpocet.PlatnyDo = Utils.addValidationTillMidnight(rozpocet.PlatnyDo);
             if (ModelState.IsValid)
             {
                 if (Utils.ZvalidujCas(rozpocet.PlatnyOd, rozpocet.PlatnyDo))
@@ -114,7 +115,7 @@ namespace WebAppPesek.Controllers
                 if (Utils.JeNovaVelikostDostacujici(staryRozpocet, rozpocet.Velikost ))
                 {
                     staryRozpocet.PlatnyOd = rozpocet.PlatnyOd;
-                    staryRozpocet.PlatnyDo = rozpocet.PlatnyDo;
+                    staryRozpocet.PlatnyDo = Utils.addValidationTillMidnight(rozpocet.PlatnyDo);
                     staryRozpocet.Nazev = rozpocet.Nazev;
                     staryRozpocet.Velikost = rozpocet.Velikost;
 
